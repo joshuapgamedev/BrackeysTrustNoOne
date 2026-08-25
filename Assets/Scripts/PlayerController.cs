@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,7 +21,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Pickup/Letgo")]
     [SerializeField] private Transform handPos;
-    [SerializeField] private GameObject instruction;
+
+    [Header("Health")]
+    [SerializeField] private float maxHealth = 5f;
+    [SerializeField] private TextMeshProUGUI healthText;
 
     private CharacterController characterController;
     private Vector3 velocity;
@@ -34,12 +38,22 @@ public class PlayerController : MonoBehaviour
 
     private bool isHoldingObject = false;
 
+    private float health;
+    private bool damangeCooldown = false;
+
+    private float cooldownTime = 2f;
+    private float cooldownTimer = 0f;
+
+    private Coroutine regenRoutine = null;
     void Start()
     {
         characterController = GetComponent<CharacterController>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        health = maxHealth;
+        UpdateHealthText();
 
     }
 
@@ -66,6 +80,15 @@ public class PlayerController : MonoBehaviour
         if(isHoldingObject && currentHolding != null)
         {
             HoldingObject();
+        }
+
+        if (damangeCooldown)
+        {
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer <= 0)
+            {
+                damangeCooldown = false;
+            }
         }
     }
 
@@ -108,9 +131,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("in range Holdable");
             hasObjectInRange = true;
             currentFocus = other.GetComponent<ObjectController>();
-            //instruction.SetActive(true);
             currentFocus.ObjectInRange(true);
         }
+
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -122,16 +146,25 @@ public class PlayerController : MonoBehaviour
             if(currentFocus!= null)
                 currentFocus.ObjectInRange(false);
             currentFocus = null;
-            //instruction.SetActive(false);
             
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Danger"))
+        {
+            if(!damangeCooldown)
+            {
+                TakeDamage(1f);
+                cooldownTimer = cooldownTime;
+                damangeCooldown = true;
+            }
         }
     }
 
     private void HoldingObject()
     {
-        //instruction.SetActive(false);
-
-        Debug.Log($"handPos: {handPos.transform.position}");
         // size / 2 
         Vector3 targetPos = handPos.transform.position;
         targetPos.y = Mathf.Clamp(targetPos.y, .5f, handPos.transform.position.y);
@@ -141,5 +174,42 @@ public class PlayerController : MonoBehaviour
         currentHolding.ObjectInRange(true);
     }
 
+    private void TakeDamage(float amount)
+    {
+        health = Mathf.Clamp(health - amount, 0, maxHealth);
+        Debug.Log($"health: {health}");
+        UpdateHealthText();
+
+        if(regenRoutine != null)
+        {
+            StopCoroutine(regenRoutine);
+            regenRoutine = StartCoroutine(RegeneratingHealth());
+        }
+        else
+        {
+            regenRoutine = StartCoroutine(RegeneratingHealth());
+        }
+        
+    }
+
+    private IEnumerator RegeneratingHealth()
+    {
+        Debug.Log($"RegeneratingHealth");
+        while (health < maxHealth)
+        {
+            yield return new WaitForSeconds(3);
+            health++;
+
+            Debug.Log($"regen: {health}");
+            UpdateHealthText();
+        }
+
+        regenRoutine = null;
+    }
+
+    private void UpdateHealthText()
+    {
+        healthText.text = health.ToString();
+    }
 }
 
