@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -17,10 +18,21 @@ public class PlayerController : MonoBehaviour
     public float lookUpLimit = -85f;
     public float lookDownLimit = 85f;
 
+    [Header("Pickup/Letgo")]
+    [SerializeField] private Transform handPos;
+    [SerializeField] private GameObject instruction;
+
     private CharacterController characterController;
     private Vector3 velocity;
     private bool isGrounded;
     private float cameraRotationX = 0f;
+
+    // pickup / let go
+    private bool hasObjectInRange = false;
+    private Transform currentFocus = null;
+    private Transform currentHolding = null;
+
+    private bool isHoldingObject = false;
 
     void Start()
     {
@@ -28,9 +40,35 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
     }
 
     void Update()
+    {
+        FPSMovement();
+        
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            if(isHoldingObject && currentHolding != null)
+            {
+                currentHolding = null;
+                isHoldingObject = false;
+            }
+
+            if(hasObjectInRange)
+            {
+                currentHolding = currentFocus;
+                isHoldingObject = true;
+            }
+        }
+
+        if(isHoldingObject && currentHolding != null)
+        {
+            HoldingObject();
+        }
+    }
+
+    private void FPSMovement()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
@@ -44,7 +82,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = characterController.isGrounded;
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f; 
+            velocity.y = -2f;
         }
 
         float moveX = Input.GetAxis("Horizontal");
@@ -61,5 +99,40 @@ public class PlayerController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Holdable"))
+        {
+            Debug.Log("in range Holdable");
+            hasObjectInRange = true;
+            currentFocus = other.transform;
+            instruction.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Holdable"))
+        {
+            Debug.Log("out of range Holdable");
+            hasObjectInRange = false;
+            currentFocus = null;
+            instruction.SetActive(false);
+        }
+    }
+
+    private void HoldingObject()
+    {
+        instruction.SetActive(false);
+
+        Debug.Log($"handPos: {handPos.transform.position}");
+        // size / 2 
+        Vector3 targetPos = handPos.transform.position;
+        targetPos.y = Mathf.Clamp(targetPos.y, .5f, handPos.transform.position.y);
+        
+        currentHolding.transform.position = targetPos;
+    }
+
 }
 
