@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour
 
     // pickup / let go
     private bool hasObjectInRange = false;
-    private Transform currentFocus = null;
-    private Transform currentHolding = null;
+    private ObjectController currentFocus = null;
+    private ObjectController currentHolding = null;
 
     private bool isHoldingObject = false;
 
@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
         {
             if(isHoldingObject && currentHolding != null)
             {
+                currentHolding.ObjectInRange(false);
                 currentHolding = null;
                 isHoldingObject = false;
             }
@@ -106,8 +107,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("in range Holdable");
             hasObjectInRange = true;
-            currentFocus = other.transform;
-            instruction.SetActive(true);
+            currentFocus = other.GetComponent<ObjectController>();
+            //instruction.SetActive(true);
+            currentFocus.ObjectInRange(true);
         }
     }
 
@@ -117,14 +119,17 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("out of range Holdable");
             hasObjectInRange = false;
+            if(currentFocus!= null)
+                currentFocus.ObjectInRange(false);
             currentFocus = null;
-            instruction.SetActive(false);
+            //instruction.SetActive(false);
+            
         }
     }
 
     private void HoldingObject()
     {
-        instruction.SetActive(false);
+        //instruction.SetActive(false);
 
         Debug.Log($"handPos: {handPos.transform.position}");
         // size / 2 
@@ -132,6 +137,8 @@ public class PlayerController : MonoBehaviour
         targetPos.y = Mathf.Clamp(targetPos.y, .5f, handPos.transform.position.y);
         
         currentHolding.transform.position = targetPos;
+
+        currentHolding.ObjectInRange(true);
     }
 
 }
