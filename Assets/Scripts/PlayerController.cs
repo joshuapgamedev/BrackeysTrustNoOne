@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-
     [Header("Movement Settings")]
     public float walkSpeed = 6.0f;
     public float gravity = -9.81f;
@@ -45,8 +44,11 @@ public class PlayerController : MonoBehaviour
     private float cooldownTimer = 0f;
 
     private Coroutine regenRoutine = null;
+
+    private GameManager gm;
     void Start()
     {
+        gm = GameManager.Instance;
         characterController = GetComponent<CharacterController>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -132,6 +134,7 @@ public class PlayerController : MonoBehaviour
             hasObjectInRange = true;
             currentFocus = other.GetComponent<ObjectController>();
             currentFocus.ObjectInRange(true);
+            gm.StartNarrator("Press E to interact!");
         }
 
         
