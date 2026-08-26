@@ -28,6 +28,7 @@ public class NarratorController : MonoBehaviour
     void Start()
     {
         StartScript(welcomeScript);
+        //PlayerController.CanMove = true;
     }
 
     // Update is called once per frame
@@ -241,13 +242,9 @@ public class NarratorController : MonoBehaviour
         }
     }
 
-    private NarratorResponse GetResponse(
-    NarratorSequence sequence,
-    NarratorEvent eventType)
+    private NarratorResponse GetResponse(NarratorSequence sequence, NarratorEvent eventType)
     {
-        return sequence.responses.Find(
-            response => response.eventType == eventType
-        );
+        return sequence.responses.Find(response => response.eventType == eventType);
     }
 
     private IEnumerator WaitForPlayerAction(NarratorSequence current)

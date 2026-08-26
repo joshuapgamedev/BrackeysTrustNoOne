@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Pickup/Letgo")]
     [SerializeField] private Transform handPos;
+    [SerializeField] private LayerMask groundLayer;
 
     [Header("Health")]
     [SerializeField] private float maxHealth = 5f;
@@ -145,15 +146,7 @@ public class PlayerController : MonoBehaviour
             hasObjectInRange = true;
             currentFocus = other.GetComponent<ObjectController>();
             currentFocus.ObjectInRange(true);
-            //gm.StartNarrator("Press E to interact!");
         }
-
-        if(other.gameObject.CompareTag("Narrator"))
-        {
-            //narrator.StartScript(other.GetComponent<NarratorZone>().sequence);
-        }
-
-        
     }
 
     private void OnTriggerExit(Collider other)
@@ -184,10 +177,36 @@ public class PlayerController : MonoBehaviour
 
     private void HoldingObject()
     {
-        // size / 2 
-        Vector3 targetPos = handPos.transform.position;
-        targetPos.y = Mathf.Clamp(targetPos.y, .5f, handPos.transform.position.y);
-        
+        Vector3 targetPos = handPos.position;
+
+        Collider[] colliders = currentHolding.GetComponents<Collider>();
+
+        Collider objectCollider = null;
+
+        foreach (Collider col in colliders)
+        {
+            if (!col.isTrigger)
+            {
+                objectCollider = col;
+                break;
+            }
+        }
+
+        Vector3 rayOrigin = targetPos + Vector3.up * 2f;
+
+        if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 5f, groundLayer, QueryTriggerInteraction.Ignore))
+        {
+            Debug.Log($"Ray hit: {hit.collider.name}, Y: {hit.point.y}");
+
+            float objectHalfHeight = objectCollider.bounds.extents.y;
+
+            float minimumY = hit.point.y + objectHalfHeight;
+
+            targetPos.y = Mathf.Max(targetPos.y, minimumY);
+
+            Debug.Log($"TargetY: {targetPos.y}, " + $"ExtentsY: {objectCollider.bounds.extents.y}, " + $"MinY: {minimumY}");
+        }
+
         currentHolding.transform.position = targetPos;
 
         currentHolding.ObjectInRange(true);

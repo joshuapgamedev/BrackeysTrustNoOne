@@ -746,7 +746,7 @@ GameObject:
   - component: {fileID: 841191836}
   - component: {fileID: 841191835}
   - component: {fileID: 841191834}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1767,7 +1767,7 @@ GameObject:
   - component: {fileID: 1703079886}
   - component: {fileID: 1703079885}
   - component: {fileID: 1703079884}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2085,6 +2085,9 @@ MonoBehaviour:
   lookUpLimit: -85
   lookDownLimit: 85
   handPos: {fileID: 544329610}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
   maxHealth: 5
   healthText: {fileID: 1019570579}
 --- !u!1 &1849746940
