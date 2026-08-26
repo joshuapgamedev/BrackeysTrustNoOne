@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3332da299460ec941aae8be0f48531c1, type: 3}
+  m_Name: 1Welcome
+  m_EditorClassIdentifier: 
+  narratorID: 1_welcome
+  sequences:
+  - sequenceID: 1
+    dialogue:
+    - text: Hello! Welcome to our <b>complete</b> little game! How exciting!
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 0
+    responses: []
+  - sequenceID: 2
+    dialogue:
+    - text: Before we get to the real thing, there are a couple of things you should
+        get familiar with first!
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 0
+    responses: []
+  - sequenceID: 3
+    dialogue:
+    - text: But don't fret! I'm here to help!
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 0
+    responses: []
+  - sequenceID: 4
+    dialogue:
+    - text: Are you ready?
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 1
+    timeout: 1.5
+    responses: []
+  - sequenceID: 5
+    dialogue:
+    - text: Great! Let's get started by moving onto the <b>green little platform</b>
+        (change this later) in front of you!
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 0
+    responses: []

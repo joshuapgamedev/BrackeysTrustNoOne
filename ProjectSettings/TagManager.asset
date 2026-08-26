@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Holdable
   - Danger
+  - Narrator
   layers:
   - Default
   - TransparentFX

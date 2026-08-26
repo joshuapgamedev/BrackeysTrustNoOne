@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3332da299460ec941aae8be0f48531c1, type: 3}
+  m_Name: 2Jump
+  m_EditorClassIdentifier: 
+  narratorID: 2_jump
+  sequences:
+  - sequenceID: 1
+    dialogue:
+    - text: Press <b> SPACE </b> to jump!
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 6
+    timeout: 4
+    responses:
+    - eventType: 0
+      nextSequenceID: 2
+      dialogue:
+      - text: Great! You're leaning fast!
+        audio: {fileID: 0}
+        delayAfter: 2
+        canBeInterrupted: 0
+    - eventType: 1
+      nextSequenceID: 2
+      dialogue:
+      - text: Ah. Yup. That's <b>exactly</b> it..
+        audio: {fileID: 0}
+        delayAfter: 0
+        canBeInterrupted: 0
+    - eventType: 2
+      nextSequenceID: 3
+      dialogue:
+      - text: Um... hello? You there? Do you need me to go slower?
+        audio: {fileID: 0}
+        delayAfter: 0
+        canBeInterrupted: 0
+    - eventType: 3
+      nextSequenceID: 4
+      dialogue:
+      - text: Oh.. okay then... I won't take this personally.. probably.
+        audio: {fileID: 0}
+        delayAfter: 0
+        canBeInterrupted: 0
+  - sequenceID: 3
+    dialogue:
+    - text: Press... <b>S..P..A..C..E..</b> to.. jump..
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 6
+    timeout: 10
+    responses:
+    - eventType: 0
+      nextSequenceID: 2
+      dialogue:
+      - text: Yes.. Finally!
+        audio: {fileID: 0}
+        delayAfter: 0
+        canBeInterrupted: 0
+    - eventType: 1
+      nextSequenceID: 2
+      dialogue:
+      - text: Good job there!
+        audio: {fileID: 0}
+        delayAfter: 0
+        canBeInterrupted: 0
+    - eventType: 2
+      nextSequenceID: 3
+      dialogue:
+      - text: Please...
+        audio: {fileID: 0}
+        delayAfter: 0
+        canBeInterrupted: 0
+    - eventType: 3
+      nextSequenceID: 4
+      dialogue:
+      - text: Okay.. No harsh feeling..
+        audio: {fileID: 0}
+        delayAfter: 0
+        canBeInterrupted: 0
+  - sequenceID: 2
+    dialogue:
+    - text: Good, good! Now onto the next one!
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+  - sequenceID: 4
+    dialogue:
+    - text: Maybe the next one will be more exciting for you? Let's get to it!
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []

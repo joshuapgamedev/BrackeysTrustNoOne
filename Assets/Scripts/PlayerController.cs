@@ -45,10 +45,16 @@ public class PlayerController : MonoBehaviour
 
     private Coroutine regenRoutine = null;
 
-    private GameManager gm;
+    private NarratorController narrator;
+
+    public static bool CanMove { get; set; } = false;
+
+    public static event System.Action OnPlayerJumped;
+    public static event System.Action OnPlayerInteracted;
+
     void Start()
     {
-        gm = GameManager.Instance;
+        narrator = NarratorController.Instance;
         characterController = GetComponent<CharacterController>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -61,7 +67,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        FPSMovement();
+        if(CanMove)
+        {
+            FPSMovement();
+        }
+            
         
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
@@ -120,6 +130,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            OnPlayerJumped?.Invoke();
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -134,7 +145,12 @@ public class PlayerController : MonoBehaviour
             hasObjectInRange = true;
             currentFocus = other.GetComponent<ObjectController>();
             currentFocus.ObjectInRange(true);
-            gm.StartNarrator("Press E to interact!");
+            //gm.StartNarrator("Press E to interact!");
+        }
+
+        if(other.gameObject.CompareTag("Narrator"))
+        {
+            //narrator.StartScript(other.GetComponent<NarratorZone>().sequence);
         }
 
         
@@ -175,6 +191,8 @@ public class PlayerController : MonoBehaviour
         currentHolding.transform.position = targetPos;
 
         currentHolding.ObjectInRange(true);
+
+        OnPlayerInteracted?.Invoke();
     }
 
     private void TakeDamage(float amount)
