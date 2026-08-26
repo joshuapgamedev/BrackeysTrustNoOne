@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -46,8 +47,6 @@ public class PlayerController : MonoBehaviour
 
     private Coroutine regenRoutine = null;
 
-    private NarratorController narrator;
-
     public static bool CanMove { get; set; } = false;
 
     public static event System.Action OnPlayerJumped;
@@ -55,7 +54,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        narrator = NarratorController.Instance;
         characterController = GetComponent<CharacterController>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -68,29 +66,30 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(CanMove)
+        if (CanMove)
         {
             FPSMovement();
         }
-            
-        
+
+
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
-            if(isHoldingObject && currentHolding != null)
+            if (isHoldingObject && currentHolding != null)
             {
                 currentHolding.ObjectInRange(false);
                 currentHolding = null;
                 isHoldingObject = false;
             }
 
-            if(hasObjectInRange)
+            if (hasObjectInRange)
             {
-                currentHolding = currentFocus;
-                isHoldingObject = true;
+                CheckObjectTag();
+                //currentHolding = currentFocus;
+                //isHoldingObject = true;
             }
         }
 
-        if(isHoldingObject && currentHolding != null)
+        if (isHoldingObject && currentHolding != null)
         {
             HoldingObject();
         }
@@ -140,18 +139,23 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Holdable"))
+        if (other.gameObject.CompareTag("Holdable")
+            || other.gameObject.CompareTag("Toggleable")
+            || other.gameObject.CompareTag("Interactable"))
         {
             Debug.Log("in range Holdable");
             hasObjectInRange = true;
             currentFocus = other.GetComponent<ObjectController>();
             currentFocus.ObjectInRange(true);
         }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Holdable"))
+        if (other.gameObject.CompareTag("Holdable")
+            || other.gameObject.CompareTag("Toggleable")
+            || other.gameObject.CompareTag("Interactable"))
         {
             Debug.Log("out of range Holdable");
             hasObjectInRange = false;
@@ -250,6 +254,39 @@ public class PlayerController : MonoBehaviour
     private void UpdateHealthText()
     {
         healthText.text = health.ToString();
+    }
+
+    private void InteractWithObject()
+    {
+        // very temp logic
+        if (currentFocus.transform.position.y > .4f)
+            currentFocus.transform.position = new Vector3(currentFocus.transform.position.x, .4f, currentFocus.transform.position.z);
+    }
+
+    private void ToggleObject()
+    {
+        // very temp logic
+        if(currentFocus.transform.localEulerAngles.z < 300 )
+            currentFocus.transform.localEulerAngles = new Vector3(0f, 0f, -45f);
+        else if (currentFocus.transform.localEulerAngles.z > 300)
+            currentFocus.transform.localEulerAngles = new Vector3(0f, 0f, 45f);
+    }
+
+    private void CheckObjectTag()
+    {
+        if(currentFocus.CompareTag("Holdable"))
+        {
+            currentHolding = currentFocus;
+            isHoldingObject = true;
+        } 
+        else if(currentFocus.CompareTag("Toggleable"))
+        {
+            ToggleObject();
+        }
+        else if (currentFocus.CompareTag("Interactable"))
+        {
+            InteractWithObject();
+        }
     }
 }
 
