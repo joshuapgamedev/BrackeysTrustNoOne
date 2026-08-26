@@ -30,6 +30,9 @@ MonoBehaviour:
         audio: {fileID: 0}
         delayAfter: 2
         canBeInterrupted: 0
+      taskUpdate:
+        action: 2
+        taskID: jump_tutorial
     - eventType: 1
       nextSequenceID: 2
       dialogue:
@@ -37,6 +40,9 @@ MonoBehaviour:
         audio: {fileID: 0}
         delayAfter: 0
         canBeInterrupted: 0
+      taskUpdate:
+        action: 2
+        taskID: jump_tutorial
     - eventType: 2
       nextSequenceID: 3
       dialogue:
@@ -44,6 +50,9 @@ MonoBehaviour:
         audio: {fileID: 0}
         delayAfter: 0
         canBeInterrupted: 0
+      taskUpdate:
+        action: 0
+        taskID: 
     - eventType: 3
       nextSequenceID: 4
       dialogue:
@@ -51,6 +60,12 @@ MonoBehaviour:
         audio: {fileID: 0}
         delayAfter: 0
         canBeInterrupted: 0
+      taskUpdate:
+        action: 4
+        taskID: jump_tutorial
+    taskUpdate:
+      action: 1
+      taskID: jump_tutorial
   - sequenceID: 3
     dialogue:
     - text: Press... <b>S..P..A..C..E..</b> to.. jump..
@@ -67,6 +82,9 @@ MonoBehaviour:
         audio: {fileID: 0}
         delayAfter: 0
         canBeInterrupted: 0
+      taskUpdate:
+        action: 2
+        taskID: jump_tutorial
     - eventType: 1
       nextSequenceID: 2
       dialogue:
@@ -74,6 +92,9 @@ MonoBehaviour:
         audio: {fileID: 0}
         delayAfter: 0
         canBeInterrupted: 0
+      taskUpdate:
+        action: 2
+        taskID: jump_tutorial
     - eventType: 2
       nextSequenceID: 3
       dialogue:
@@ -81,6 +102,9 @@ MonoBehaviour:
         audio: {fileID: 0}
         delayAfter: 0
         canBeInterrupted: 0
+      taskUpdate:
+        action: 0
+        taskID: 
     - eventType: 3
       nextSequenceID: 4
       dialogue:
@@ -88,6 +112,12 @@ MonoBehaviour:
         audio: {fileID: 0}
         delayAfter: 0
         canBeInterrupted: 0
+      taskUpdate:
+        action: 4
+        taskID: jump_tutorial
+    taskUpdate:
+      action: 0
+      taskID: 
   - sequenceID: 2
     dialogue:
     - text: Good, good! Now onto the next one!
@@ -97,6 +127,9 @@ MonoBehaviour:
     waitType: 0
     timeout: 0
     responses: []
+    taskUpdate:
+      action: 4
+      taskID: jump_tutorial
   - sequenceID: 4
     dialogue:
     - text: Maybe the next one will be more exciting for you? Let's get to it!
@@ -106,3 +139,6 @@ MonoBehaviour:
     waitType: 0
     timeout: 0
     responses: []
+    taskUpdate:
+      action: 4
+      taskID: jump_tutorial

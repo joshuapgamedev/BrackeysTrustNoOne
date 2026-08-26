@@ -22,6 +22,8 @@ public class NarratorSequence
     public float timeout = 0f;
 
     public List<NarratorResponse> responses;
+
+    public TaskUpdate taskUpdate;
 }
 
 public enum NarratorWaitType
@@ -43,6 +45,7 @@ public class NarratorResponse
     public NarratorEvent eventType;
     public string nextSequenceID;
     public List<NarratorLine> dialogue;
+    public TaskUpdate taskUpdate;
 }
 
 [System.Serializable]
@@ -64,4 +67,20 @@ public enum NarratorEvent
     InteractedEarly,
     Timeout,
     PlayerLeft
+}
+
+public enum TaskAction
+{
+    None,
+    Add,
+    Complete,
+    Fail,
+    Remove
+}
+
+[System.Serializable]
+public class TaskUpdate
+{
+    public TaskAction action;
+    public string taskID;
 }

@@ -46,7 +46,6 @@ public class TypewriterEffect : MonoBehaviour
     {
         isTyping = true;
 
-        // Force text generation framework to update so we get valid character info maps
         textMeshPro.ForceMeshUpdate();
         TMP_TextInfo textInfo = textMeshPro.textInfo;
         int totalCharacters = textInfo.characterCount;
@@ -59,7 +58,6 @@ public class TypewriterEffect : MonoBehaviour
 
             if (currentVisibleCount < totalCharacters)
             {
-                // Accessing characterInfo directly avoids reading hidden TMPro rich text tags
                 char characterTyped = textInfo.characterInfo[currentVisibleCount].character;
 
                 if (punctuationMarks.Contains(characterTyped))

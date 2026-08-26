@@ -19,7 +19,6 @@ public class NarratorController : MonoBehaviour
     private bool actionWasEarly = false;
     private bool playerLeftTrigger = false;
 
-
     private void Awake()
     {
         Instance = this;
@@ -50,24 +49,6 @@ public class NarratorController : MonoBehaviour
 
         }
 
-        
-
-        if (Keyboard.current.enterKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            /*
-            if(narratorBox.activeSelf)
-            {
-                narratorText.SkipToEnd();
-            }*/
-
-        }
-
-        if (Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            //StartNarrator("Good!");
-        }
-
-       
     }
 
     private void OnEnable()
@@ -138,6 +119,8 @@ public class NarratorController : MonoBehaviour
             {
                 UpdateNarratorUIText(line.text);
                 yield return new WaitForSeconds(line.delayAfter);
+
+                ManageTask(current.taskUpdate);
             }
 
             NarratorResponse response = null;
@@ -207,6 +190,7 @@ public class NarratorController : MonoBehaviour
 
             if (response != null)
             {
+                ManageTask(response.taskUpdate);
                 yield return StartCoroutine( PlayResponse(response) );
 
                 currentSequenceID = response.nextSequenceID;
@@ -259,6 +243,28 @@ public class NarratorController : MonoBehaviour
         {
             timer += Time.deltaTime;
             yield return null;
+        }
+    }
+
+    private void ManageTask(TaskUpdate taskEvent)
+    {
+        if (taskEvent.action != TaskAction.None)
+        {
+            switch (taskEvent.action)
+            {
+                case TaskAction.Complete:
+                    TaskListManager.Instance.CompleteTask(taskEvent.taskID);
+                    break;
+                case TaskAction.Fail:
+                    break;
+                case TaskAction.Remove:
+                    TaskListManager.Instance.ClearTask();
+                    break;
+                case TaskAction.Add:
+                    TaskListManager.Instance.DisplayTask(taskEvent.taskID);
+                    break;
+            }
+            
         }
     }
 }
