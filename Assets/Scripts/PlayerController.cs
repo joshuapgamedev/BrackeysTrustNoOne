@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
     public static event System.Action OnPlayerJumped;
     public static event System.Action OnPlayerInteracted;
+    public static event System.Action OnPlayerToggleLever;
 
     void Start()
     {
@@ -143,10 +144,15 @@ public class PlayerController : MonoBehaviour
             || other.gameObject.CompareTag("Toggleable")
             || other.gameObject.CompareTag("Interactable"))
         {
-            Debug.Log("in range Holdable");
+            //Debug.Log("in range Holdable");
             hasObjectInRange = true;
             currentFocus = other.GetComponent<ObjectController>();
             currentFocus.ObjectInRange(true);
+        }
+        if (other.gameObject.CompareTag("PressurePlate"))
+        {
+            currentFocus = other.GetComponent<ObjectController>();
+            currentFocus.TriggerPressurePlate();
         }
 
     }
@@ -157,12 +163,17 @@ public class PlayerController : MonoBehaviour
             || other.gameObject.CompareTag("Toggleable")
             || other.gameObject.CompareTag("Interactable"))
         {
-            Debug.Log("out of range Holdable");
+            //Debug.Log("out of range Holdable");
             hasObjectInRange = false;
             if(currentFocus!= null)
                 currentFocus.ObjectInRange(false);
             currentFocus = null;
             
+        }
+        if (other.gameObject.CompareTag("PressurePlate"))
+        {
+            currentFocus.TriggerPressurePlate();
+            currentFocus = null;
         }
     }
 
@@ -179,10 +190,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     private void HoldingObject()
     {
         Vector3 targetPos = handPos.position;
 
+        /*
         Collider[] colliders = currentHolding.GetComponents<Collider>();
 
         Collider objectCollider = null;
@@ -194,13 +207,15 @@ public class PlayerController : MonoBehaviour
                 objectCollider = col;
                 break;
             }
-        }
+        }*/
 
+        Collider objectCollider = currentHolding.transform.GetChild(0).GetComponent<Collider>();
+       
         Vector3 rayOrigin = targetPos + Vector3.up * 2f;
 
         if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 5f, groundLayer, QueryTriggerInteraction.Ignore))
         {
-            Debug.Log($"Ray hit: {hit.collider.name}, Y: {hit.point.y}");
+            //Debug.Log($"Ray hit: {hit.collider.name}, Y: {hit.point.y}");
 
             float objectHalfHeight = objectCollider.bounds.extents.y;
 
@@ -208,7 +223,7 @@ public class PlayerController : MonoBehaviour
 
             targetPos.y = Mathf.Max(targetPos.y, minimumY);
 
-            Debug.Log($"TargetY: {targetPos.y}, " + $"ExtentsY: {objectCollider.bounds.extents.y}, " + $"MinY: {minimumY}");
+            //Debug.Log($"TargetY: {targetPos.y}, " + $"ExtentsY: {objectCollider.bounds.extents.y}, " + $"MinY: {minimumY}");
         }
 
         currentHolding.transform.position = targetPos;
@@ -221,7 +236,7 @@ public class PlayerController : MonoBehaviour
     private void TakeDamage(float amount)
     {
         health = Mathf.Clamp(health - amount, 0, maxHealth);
-        Debug.Log($"health: {health}");
+        //Debug.Log($"health: {health}");
         UpdateHealthText();
 
         if(regenRoutine != null)
@@ -238,13 +253,13 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator RegeneratingHealth()
     {
-        Debug.Log($"RegeneratingHealth");
+        //Debug.Log($"RegeneratingHealth");
         while (health < maxHealth)
         {
             yield return new WaitForSeconds(3);
             health++;
 
-            Debug.Log($"regen: {health}");
+            //Debug.Log($"regen: {health}");
             UpdateHealthText();
         }
 
@@ -270,6 +285,9 @@ public class PlayerController : MonoBehaviour
             currentFocus.transform.localEulerAngles = new Vector3(0f, 0f, -45f);
         else if (currentFocus.transform.localEulerAngles.z > 300)
             currentFocus.transform.localEulerAngles = new Vector3(0f, 0f, 45f);
+
+        currentFocus.Activated();
+        OnPlayerToggleLever?.Invoke();
     }
 
     private void CheckObjectTag()
@@ -286,6 +304,10 @@ public class PlayerController : MonoBehaviour
         else if (currentFocus.CompareTag("Interactable"))
         {
             InteractWithObject();
+        }
+        else if(currentFocus.CompareTag("PressurePlate"))
+        {
+            currentFocus.TriggerPressurePlate();
         }
     }
 }

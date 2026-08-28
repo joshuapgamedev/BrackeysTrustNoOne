@@ -19,6 +19,8 @@ public class NarratorController : MonoBehaviour
     private bool actionWasEarly = false;
     private bool playerLeftTrigger = false;
 
+    private bool playerCompletedPuzzle = false;
+
     private void Awake()
     {
         Instance = this;
@@ -26,8 +28,8 @@ public class NarratorController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartScript(welcomeScript);
-        //PlayerController.CanMove = true;
+        //StartScript(welcomeScript);
+        PlayerController.CanMove = true;
     }
 
     // Update is called once per frame
@@ -55,17 +57,18 @@ public class NarratorController : MonoBehaviour
     {
         PlayerController.OnPlayerJumped += HandlePlayerJumped;
         PlayerController.OnPlayerInteracted += HandlePlayerInteract;
+        PuzzleManager.OnPlayerCompletedPuzzle += HandlePlayerCompletedPuzzle;
     }
 
     private void OnDisable()
     {
         PlayerController.OnPlayerJumped -= HandlePlayerJumped;
         PlayerController.OnPlayerInteracted -= HandlePlayerInteract;
+        PuzzleManager.OnPlayerCompletedPuzzle -= HandlePlayerCompletedPuzzle;
     }
 
     private void HandlePlayerJumped()
     {
-        Debug.Log("player jumped?");
         playerActionCompleted = true;
 
         if (narratorText.IsTyping)
@@ -86,6 +89,10 @@ public class NarratorController : MonoBehaviour
             actionWasEarly = true;
     }
 
+    private void HandlePlayerCompletedPuzzle()
+    {
+        playerCompletedPuzzle = true;
+    }
     public void UpdateNarratorUIText(string text)
     {
         narratorBox.SetActive(true);
@@ -128,12 +135,14 @@ public class NarratorController : MonoBehaviour
             switch (current.waitType)
             {
                 case NarratorWaitType.None:
+                    //StartCoroutine(WaitForTypewriter(.5f));
                     yield return new WaitUntil(() => narratorText.IsTyping == false);
-                    yield return new WaitForSeconds(.3f);
+                    yield return new WaitForSeconds(1f);
                     currentSequenceID = null;
                     break;
 
                 case NarratorWaitType.NextLineTrigger:
+                    //StartCoroutine(WaitForTypewriter(.3f));
                     yield return new WaitUntil(() => narratorText.IsTyping == false);
                     yield return new WaitForSeconds(.3f);
                     waitForNextLine = true;
@@ -156,6 +165,7 @@ public class NarratorController : MonoBehaviour
                 case NarratorWaitType.PlayerInteract:
                 case NarratorWaitType.PlayerJump:
 
+                    StartCoroutine(WaitForTypewriter(.5f));
                     yield return StartCoroutine(WaitForPlayerAction(current));
 
                     /*
@@ -186,6 +196,22 @@ public class NarratorController : MonoBehaviour
                     }
 
                     break;
+
+                case NarratorWaitType.PlayerCompletePressurePlatePuzzle:
+                case NarratorWaitType.PlayerCompleteLeverPuzzle:
+
+                    yield return new WaitUntil(() => narratorText.IsTyping == false);
+                    yield return new WaitForSeconds(1f);
+                    narratorBox.SetActive(false);
+
+                    yield return StartCoroutine(WaitForPlayerToCompletePuzzle(current));
+
+                    if (playerCompletedPuzzle)
+                    {
+                        response = GetResponse(current, actionWasEarly ? NarratorEvent.InteractedEarly : NarratorEvent.CompletedNormally);
+                    }
+                    break;
+
             }
 
             if (response != null)
@@ -193,6 +219,7 @@ public class NarratorController : MonoBehaviour
                 ManageTask(response.taskUpdate);
                 yield return StartCoroutine( PlayResponse(response) );
 
+                Debug.Log($"nextSequenceID: {response.nextSequenceID}");
                 currentSequenceID = response.nextSequenceID;
             }
             
@@ -215,9 +242,10 @@ public class NarratorController : MonoBehaviour
         foreach (NarratorLine line in response.dialogue)
         {
             UpdateNarratorUIText(line.text);
+            //StartCoroutine(WaitForTypewriter(.3f));
 
             yield return new WaitUntil(() => narratorText.IsTyping == false);
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.3f);
 
             if(line.delayAfter > 0)
             {
@@ -246,8 +274,19 @@ public class NarratorController : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitForPlayerToCompletePuzzle(NarratorSequence current)
+    {
+        playerCompletedPuzzle = false;
+        while(!playerCompletedPuzzle)
+        {
+            yield return null;
+        }
+        
+    }
+
     private void ManageTask(TaskUpdate taskEvent)
     {
+        //Debug.Log("ManagerTask called");
         if (taskEvent.action != TaskAction.None)
         {
             switch (taskEvent.action)
@@ -266,5 +305,12 @@ public class NarratorController : MonoBehaviour
             }
             
         }
+    }
+
+    private IEnumerator WaitForTypewriter(float time)
+    {
+        yield return new WaitUntil(() => narratorText.IsTyping == false);
+        yield return new WaitForSeconds(time);
+        
     }
 }

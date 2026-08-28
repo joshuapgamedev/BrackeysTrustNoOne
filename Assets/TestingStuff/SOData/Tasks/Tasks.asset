@@ -15,3 +15,7 @@ MonoBehaviour:
   tasks:
   - taskID: jump_tutorial
     taskText: Try Jumping
+  - taskID: leverPuzzle
+    taskText: Activate every levers
+  - taskID: pressurePuzzle
+    taskText: Activate every buttons

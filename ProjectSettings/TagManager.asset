@@ -9,6 +9,8 @@ TagManager:
   - Narrator
   - Interactable
   - Toggleable
+  - PressurePlate
+  - ObjectCollider
   layers:
   - Default
   - TransparentFX

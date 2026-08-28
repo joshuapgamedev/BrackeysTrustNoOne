@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3332da299460ec941aae8be0f48531c1, type: 3}
+  m_Name: PressurePlate
+  m_EditorClassIdentifier: 
+  narratorID: PressurePlate
+  sequences:
+  - sequenceID: 1
+    dialogue:
+    - text: Activated <b>every</b> button.
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 10
+    timeout: 0
+    responses:
+    - eventType: 0
+      nextSequenceID: 2
+      dialogue:
+      - text: Good job!
+        audio: {fileID: 0}
+        delayAfter: 0
+        canBeInterrupted: 0
+      taskUpdate:
+        action: 2
+        taskID: pressurePuzzle
+    taskUpdate:
+      action: 1
+      taskID: pressurePuzzle
+  - sequenceID: 2
+    dialogue:
+    - text: Next!!
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+    taskUpdate:
+      action: 4
+      taskID: pressurePuzzle

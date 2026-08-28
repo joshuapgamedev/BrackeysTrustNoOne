@@ -36,7 +36,9 @@ public enum NarratorWaitType
     PlayerInteract,
     PlayerJump,
     PlayerMove,
-    PlayerCrouch
+    PlayerCrouch,
+    PlayerCompleteLeverPuzzle,
+    PlayerCompletePressurePlatePuzzle,
 }
 
 [System.Serializable]
