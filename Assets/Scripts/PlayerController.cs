@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxHealth = 5f;
     [SerializeField] private TextMeshProUGUI healthText;
 
+    [Header("UI")]
+    [SerializeField] private GameObject crosshair;
+    [SerializeField] private GameObject grabCrosshair;
+
+
     private CharacterController characterController;
     private Vector3 velocity;
     private bool isGrounded;
@@ -50,9 +55,9 @@ public class PlayerController : MonoBehaviour
     public static bool CanMove { get; set; } = false;
 
     public static event System.Action OnPlayerJumped;
-    public static event System.Action OnPlayerInteracted;
+    //public static event System.Action OnPlayerInteracted;
     public static event System.Action OnPlayerToggleLever;
-    public static event System.Action OnPlayerPressButton;
+    //public static event System.Action OnPlayerPressButton;
 
     void Start()
     {
@@ -78,10 +83,7 @@ public class PlayerController : MonoBehaviour
         {
             if (isHoldingObject && currentHolding != null)
             {
-                currentHolding.ObjectInRange(false);
-                currentHolding.PlaySFX(PlayerAction.Drop);
-                currentHolding = null;
-                isHoldingObject = false;
+                ReleaseHeldObject();
 
                 return;
             }
@@ -153,12 +155,14 @@ public class PlayerController : MonoBehaviour
             currentFocus = other.GetComponent<ObjectController>();
             currentFocus.ObjectInRange(true);
 
-            
+            ToggleCrosshair(true);
+
         }
         if (other.gameObject.CompareTag("PressurePlate"))
         {
             currentFocus = other.GetComponent<ObjectController>();
             currentFocus.TriggerPressurePlate();
+
         }
 
     }
@@ -174,12 +178,14 @@ public class PlayerController : MonoBehaviour
             if(currentFocus!= null)
                 currentFocus.ObjectInRange(false);
             currentFocus = null;
-            
+
+            ToggleCrosshair(false);
         }
         if (other.gameObject.CompareTag("PressurePlate"))
         {
             currentFocus.TriggerPressurePlate();
             currentFocus = null;
+
         }
     }
 
@@ -199,6 +205,7 @@ public class PlayerController : MonoBehaviour
 
     private void HoldingObject()
     {
+        ToggleCrosshair(true, true);
         Vector3 targetPos = handPos.position;
 
         /*
@@ -236,6 +243,22 @@ public class PlayerController : MonoBehaviour
 
         currentHolding.ObjectInRange(true);
 
+    }
+
+    public void ReleaseHeldObject(bool playDropSFX = true)
+    {
+        StartCoroutine(ToggleCrosshairWhenReleased());
+
+        if (!isHoldingObject || currentHolding == null)
+            return;
+
+        if (playDropSFX)
+            currentHolding.PlaySFX(PlayerAction.Drop);
+
+        currentHolding.ObjectInRange(false);
+
+        currentHolding = null;
+        isHoldingObject = false;
     }
 
     private void TakeDamage(float amount)
@@ -276,16 +299,11 @@ public class PlayerController : MonoBehaviour
         healthText.text = health.ToString();
     }
 
-    private void InteractWithObject()
-    {
-        currentFocus.PressButton();
-        
-    }
-
     private void ToggleObject()
     {
+        StartCoroutine(ToggleCrosshairForSecond());
         // very temp logic
-        if(currentFocus.transform.localEulerAngles.z < 300 )
+        if (currentFocus.transform.localEulerAngles.z < 300 )
             currentFocus.transform.localEulerAngles = new Vector3(0f, 0f, -45f);
         else if (currentFocus.transform.localEulerAngles.z > 300)
             currentFocus.transform.localEulerAngles = new Vector3(0f, 0f, 45f);
@@ -294,6 +312,8 @@ public class PlayerController : MonoBehaviour
         OnPlayerToggleLever?.Invoke();
         currentFocus.PlaySFX(PlayerAction.ToggleLever);
     }
+
+    
 
     private void CheckObjectTag()
     {
@@ -309,9 +329,43 @@ public class PlayerController : MonoBehaviour
         }
         else if (currentFocus.CompareTag("Interactable"))
         {
+            StartCoroutine(ToggleCrosshairForSecond());
             currentFocus.PressButton();
             //InteractWithObject();
         }
     }
+
+    public bool IsHolding(ObjectController obj)
+    {
+        return isHoldingObject && currentHolding == obj;
+    }
+
+    private void ToggleCrosshair(bool on, bool isGrabbing = false)
+    {
+        if(!on)
+        {
+            crosshair.SetActive(false);
+            grabCrosshair.SetActive(false);
+            return;
+        }
+
+        crosshair.SetActive(isGrabbing?false:true);
+        grabCrosshair.SetActive(isGrabbing?true:false);
+    }
+
+    private IEnumerator ToggleCrosshairForSecond()
+    {
+        ToggleCrosshair(true, true);
+        yield return new WaitForSeconds(.5f);
+        ToggleCrosshair(true, false);
+    }
+
+    private IEnumerator ToggleCrosshairWhenReleased()
+    {
+        ToggleCrosshair(true, false);
+        yield return new WaitForSeconds(.2f);
+        ToggleCrosshair(false);
+    }
+
 }
 

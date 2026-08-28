@@ -7,10 +7,13 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private List<ObjectController> levers;
     [SerializeField] private List<ObjectController> pressurePlates;
     [SerializeField] private List<ObjectController> buttons;
+    [SerializeField] private int requiredShapes = 3;
 
     private PuzzleRoomType currentPuzzle;
 
     private int nextButtonIndex = 0;
+
+    private int insertedShapeCount = 0;
 
     public static event System.Action OnPlayerCompletedPuzzle;
     // Start is called before the first frame update
@@ -32,6 +35,7 @@ public class PuzzleManager : MonoBehaviour
         ObjectController.OnActivatePressurePlate += CheckPuzzle;
         ObjectController.OnPressButton += CheckButtonPuzzleOrder;
         ObjectController.OnButtonExpired += HandleButtonExpired;
+        SquareHoleController.OnShapeInserted += ShapeInserted;
     }
 
     private void OnDisable()
@@ -41,6 +45,7 @@ public class PuzzleManager : MonoBehaviour
         ObjectController.OnActivatePressurePlate -= CheckPuzzle;
         ObjectController.OnPressButton -= CheckButtonPuzzleOrder;
         ObjectController.OnButtonExpired -= HandleButtonExpired;
+        SquareHoleController.OnShapeInserted -= ShapeInserted;
     }
 
     private void ChoooseRoom(PuzzleRoomType puzzleType)
@@ -139,6 +144,23 @@ public class PuzzleManager : MonoBehaviour
         OnPlayerCompletedPuzzle?.Invoke();
 
         nextButtonIndex = 0;
+    }
+
+    private void ShapeInserted(ObjectController shape)
+    {
+        if (currentPuzzle != PuzzleRoomType.SquareHole)
+            return;
+
+        insertedShapeCount++;
+
+        Debug.Log($"Shape inserted: {shape.objectId} " + $"({insertedShapeCount}/3)");
+
+        if (insertedShapeCount >= requiredShapes)
+        {
+            OnPlayerCompletedPuzzle?.Invoke();
+
+            Debug.Log("Square hole puzzle completed!");
+        }
     }
 
 }

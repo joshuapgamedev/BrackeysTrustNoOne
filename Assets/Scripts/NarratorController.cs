@@ -56,14 +56,12 @@ public class NarratorController : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.OnPlayerJumped += HandlePlayerJumped;
-        PlayerController.OnPlayerInteracted += HandlePlayerInteract;
         PuzzleManager.OnPlayerCompletedPuzzle += HandlePlayerCompletedPuzzle;
     }
 
     private void OnDisable()
     {
         PlayerController.OnPlayerJumped -= HandlePlayerJumped;
-        PlayerController.OnPlayerInteracted -= HandlePlayerInteract;
         PuzzleManager.OnPlayerCompletedPuzzle -= HandlePlayerCompletedPuzzle;
     }
 
@@ -79,14 +77,6 @@ public class NarratorController : MonoBehaviour
     public void PlayerLeftTrigger()
     {
         playerLeftTrigger = true;
-    }
-
-    private void HandlePlayerInteract()
-    {
-        playerActionCompleted = true;
-
-        if (narratorText.IsTyping)
-            actionWasEarly = true;
     }
 
     private void HandlePlayerCompletedPuzzle()
