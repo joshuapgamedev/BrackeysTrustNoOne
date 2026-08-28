@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     public static event System.Action OnPlayerJumped;
     public static event System.Action OnPlayerInteracted;
     public static event System.Action OnPlayerToggleLever;
+    public static event System.Action OnPlayerPressButton;
 
     void Start()
     {
@@ -78,8 +79,11 @@ public class PlayerController : MonoBehaviour
             if (isHoldingObject && currentHolding != null)
             {
                 currentHolding.ObjectInRange(false);
+                currentHolding.PlaySFX(PlayerAction.Drop);
                 currentHolding = null;
                 isHoldingObject = false;
+
+                return;
             }
 
             if (hasObjectInRange)
@@ -148,6 +152,8 @@ public class PlayerController : MonoBehaviour
             hasObjectInRange = true;
             currentFocus = other.GetComponent<ObjectController>();
             currentFocus.ObjectInRange(true);
+
+            
         }
         if (other.gameObject.CompareTag("PressurePlate"))
         {
@@ -230,7 +236,6 @@ public class PlayerController : MonoBehaviour
 
         currentHolding.ObjectInRange(true);
 
-        OnPlayerInteracted?.Invoke();
     }
 
     private void TakeDamage(float amount)
@@ -273,9 +278,8 @@ public class PlayerController : MonoBehaviour
 
     private void InteractWithObject()
     {
-        // very temp logic
-        if (currentFocus.transform.position.y > .4f)
-            currentFocus.transform.position = new Vector3(currentFocus.transform.position.x, .4f, currentFocus.transform.position.z);
+        currentFocus.PressButton();
+        
     }
 
     private void ToggleObject()
@@ -288,6 +292,7 @@ public class PlayerController : MonoBehaviour
 
         currentFocus.Activated();
         OnPlayerToggleLever?.Invoke();
+        currentFocus.PlaySFX(PlayerAction.ToggleLever);
     }
 
     private void CheckObjectTag()
@@ -296,6 +301,7 @@ public class PlayerController : MonoBehaviour
         {
             currentHolding = currentFocus;
             isHoldingObject = true;
+            currentHolding.PlaySFX(PlayerAction.Pickup);
         } 
         else if(currentFocus.CompareTag("Toggleable"))
         {
@@ -303,11 +309,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (currentFocus.CompareTag("Interactable"))
         {
-            InteractWithObject();
-        }
-        else if(currentFocus.CompareTag("PressurePlate"))
-        {
-            currentFocus.TriggerPressurePlate();
+            currentFocus.PressButton();
+            //InteractWithObject();
         }
     }
 }

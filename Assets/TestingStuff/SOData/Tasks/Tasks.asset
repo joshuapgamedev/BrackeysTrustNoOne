@@ -19,3 +19,5 @@ MonoBehaviour:
     taskText: Activate every levers
   - taskID: pressurePuzzle
     taskText: Activate every buttons
+  - taskID: buttonPuzzle
+    taskText: Press buttons in order

@@ -155,6 +155,8 @@ public class NarratorController : MonoBehaviour
                     break;
 
                 case NarratorWaitType.Timer:
+                    yield return new WaitUntil(() => narratorText.IsTyping == false);
+                    yield return new WaitForSeconds(.3f);
                     yield return new WaitForSeconds(current.timeout);
 
                     response = GetResponse(current, NarratorEvent.Timeout);

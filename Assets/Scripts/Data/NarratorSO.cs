@@ -39,6 +39,8 @@ public enum NarratorWaitType
     PlayerCrouch,
     PlayerCompleteLeverPuzzle,
     PlayerCompletePressurePlatePuzzle,
+    CheckButtonPuzzle,
+    PlayerCompleteButtonPuzzle
 }
 
 [System.Serializable]

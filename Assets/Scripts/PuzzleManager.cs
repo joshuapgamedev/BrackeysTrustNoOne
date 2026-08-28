@@ -6,9 +6,11 @@ public class PuzzleManager : MonoBehaviour
 {
     [SerializeField] private List<ObjectController> levers;
     [SerializeField] private List<ObjectController> pressurePlates;
+    [SerializeField] private List<ObjectController> buttons;
 
     private PuzzleRoomType currentPuzzle;
 
+    private int nextButtonIndex = 0;
 
     public static event System.Action OnPlayerCompletedPuzzle;
     // Start is called before the first frame update
@@ -28,6 +30,8 @@ public class PuzzleManager : MonoBehaviour
         NarratorZone.OnPlayerEnterPuzzle += ChoooseRoom;
         PlayerController.OnPlayerToggleLever += CheckPuzzle;
         ObjectController.OnActivatePressurePlate += CheckPuzzle;
+        ObjectController.OnPressButton += CheckButtonPuzzleOrder;
+        ObjectController.OnButtonExpired += HandleButtonExpired;
     }
 
     private void OnDisable()
@@ -35,20 +39,14 @@ public class PuzzleManager : MonoBehaviour
         NarratorZone.OnPlayerEnterPuzzle -= ChoooseRoom;
         PlayerController.OnPlayerToggleLever -= CheckPuzzle;
         ObjectController.OnActivatePressurePlate -= CheckPuzzle;
+        ObjectController.OnPressButton -= CheckButtonPuzzleOrder;
+        ObjectController.OnButtonExpired -= HandleButtonExpired;
     }
 
     private void ChoooseRoom(PuzzleRoomType puzzleType)
     {
         currentPuzzle = puzzleType;
 
-        switch (currentPuzzle)
-        {
-            case PuzzleRoomType.Lever:
-                
-                return;
-            default:
-                break;
-        }
     }
 
     public void CheckPuzzle()
@@ -88,6 +86,59 @@ public class PuzzleManager : MonoBehaviour
         Debug.Log("in CompletedLeverPuzzle");
         return true;
 
+    }
+
+    private void CheckButtonPuzzleOrder(ObjectController pressedButton)
+    {
+        if (currentPuzzle != PuzzleRoomType.Button)
+            return;
+
+        // Is this exactly the button we're expecting?
+        if (pressedButton != buttons[nextButtonIndex])
+        {
+            FailButtonPuzzle();
+            return;
+        }
+
+        nextButtonIndex++;
+
+        // All four pressed correctly
+        if (nextButtonIndex >= buttons.Count)
+        {
+            CompleteButtonPuzzle();
+        }
+    }
+    private void HandleButtonExpired(ObjectController button)
+    {
+        if (currentPuzzle != PuzzleRoomType.Button)
+            return;
+
+        // If puzzle isn't already complete, timeout = fail
+        if (nextButtonIndex < buttons.Count)
+        {
+            FailButtonPuzzle();
+        }
+    }
+
+    private void FailButtonPuzzle()
+    {
+        Debug.Log("Button puzzle failed!");
+
+        nextButtonIndex = 0;
+
+        foreach (ObjectController button in buttons)
+        {
+            button.ResetButton();
+        }
+    }
+
+    private void CompleteButtonPuzzle()
+    {
+        Debug.Log("Button puzzle completed!");
+
+        OnPlayerCompletedPuzzle?.Invoke();
+
+        nextButtonIndex = 0;
     }
 
 }
