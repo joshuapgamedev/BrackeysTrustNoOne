@@ -7,9 +7,16 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject settingMenu;
+    [SerializeField] private NarratorController narrator;
     // Start is called before the first frame update
     private bool isSettingOpen = false;
-    
+    private bool firstTime = true;
+
+    private void Awake()
+    {
+        Time.timeScale = 0.0f;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -51,4 +58,19 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void OnControlsMenuClose()
+    {
+        if (firstTime)
+        {
+            Time.timeScale = 1.0f;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            //narrator.StartScript(narrator.welcomeScript);
+            PlayerController.CanMove = true;
+            firstTime = false;
+            
+        }
+    }
+
 }

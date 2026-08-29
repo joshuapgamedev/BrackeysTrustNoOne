@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class NarratorController : MonoBehaviour
 {
-    [SerializeField] private NarratorSO welcomeScript;
+    [SerializeField] public NarratorSO welcomeScript;
     [SerializeField] private GameObject narratorBox;
     [SerializeField] private TypewriterEffect narratorText;
 
@@ -29,7 +29,7 @@ public class NarratorController : MonoBehaviour
     void Start()
     {
         //StartScript(welcomeScript);
-        PlayerController.CanMove = true;
+        //PlayerController.CanMove = true;
     }
 
     // Update is called once per frame

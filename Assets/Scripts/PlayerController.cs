@@ -46,13 +46,13 @@ public class PlayerController : MonoBehaviour
 
     private bool isHoldingObject = false;
 
-    private float health;
+    //private float health;
     private bool damangeCooldown = false;
 
-    private float cooldownTime = 2f;
+   // private float cooldownTime = 2f;
     private float cooldownTimer = 0f;
 
-    private Coroutine regenRoutine = null;
+    //private Coroutine regenRoutine = null;
 
     public static bool CanMove { get; set; } = false;
 
@@ -65,8 +65,8 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
 
         //health = maxHealth;
         //UpdateHealthText();
