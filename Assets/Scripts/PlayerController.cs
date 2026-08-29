@@ -226,26 +226,81 @@ public class PlayerController : MonoBehaviour
             }
         }*/
 
-        Collider objectCollider = currentHolding.transform.GetChild(0).GetComponent<Collider>();
-       
-        Vector3 rayOrigin = targetPos + Vector3.up * 2f;
-
-        if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 5f, groundLayer, QueryTriggerInteraction.Ignore))
+        if(currentHolding.transform.childCount > 2)
         {
-            //Debug.Log($"Ray hit: {hit.collider.name}, Y: {hit.point.y}");
+            Collider[] colliders = currentHolding.GetComponentsInChildren<Collider>();
 
-            float objectHalfHeight = objectCollider.bounds.extents.y;
+            float lowestColliderY = float.MaxValue;
 
-            float minimumY = hit.point.y + objectHalfHeight;
+            foreach (Collider col in colliders)
+            {
+                // Ignore the giant interaction trigger
+                if (col.isTrigger)
+                    continue;
 
-            targetPos.y = Mathf.Max(targetPos.y, minimumY);
+                lowestColliderY = Mathf.Min(
+                    lowestColliderY,
+                    col.bounds.min.y
+                );
+            }
 
-            //Debug.Log($"TargetY: {targetPos.y}, " + $"ExtentsY: {objectCollider.bounds.extents.y}, " + $"MinY: {minimumY}");
+            Vector3 rayOrigin = targetPos + Vector3.up * 2f;
+
+            if (Physics.Raycast(
+                rayOrigin,
+                Vector3.down,
+                out RaycastHit hit,
+                5f,
+                groundLayer,
+                QueryTriggerInteraction.Ignore))
+            {
+                // Distance from object's ROOT/pivot
+                // to the lowest point of any collider
+                float pivotToBottom =
+                    currentHolding.transform.position.y
+                    - lowestColliderY;
+
+                float minimumRootY =
+                    hit.point.y + pivotToBottom;
+
+                targetPos.y = Mathf.Max(
+                    targetPos.y,
+                    minimumRootY
+                );
+            }
+
+            currentHolding.transform.position = targetPos;
+            currentHolding.ObjectInRange(true);
+        }
+        else
+        {
+            Collider objectCollider = currentHolding.transform.GetChild(0).GetComponent<Collider>();
+
+            Vector3 rayOrigin = targetPos + Vector3.up * 2f;
+
+            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 5f, groundLayer, QueryTriggerInteraction.Ignore))
+            {
+                //Debug.Log($"Ray hit: {hit.collider.name}, Y: {hit.point.y}");
+
+                float objectHalfHeight = objectCollider.bounds.extents.y;
+
+                float minimumY = hit.point.y + objectHalfHeight;
+
+                targetPos.y = Mathf.Max(targetPos.y, minimumY);
+
+                //Debug.Log($"TargetY: {targetPos.y}, " + $"ExtentsY: {objectCollider.bounds.extents.y}, " + $"MinY: {minimumY}");
+            }
+
+            //currentHolding.transform.position = targetPos;
+
+            Vector3 holdOffset = currentHolding.HoldPoint.position - currentHolding.transform.position;
+
+            currentHolding.transform.position = targetPos - holdOffset;
+
+            currentHolding.ObjectInRange(true);
         }
 
-        currentHolding.transform.position = targetPos;
-
-        currentHolding.ObjectInRange(true);
+            
 
     }
 
