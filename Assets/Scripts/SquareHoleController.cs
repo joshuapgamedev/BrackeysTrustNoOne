@@ -44,7 +44,7 @@ public class SquareHoleController : MonoBehaviour
         if (objectController == null)
             return;
 
-        // Only steal it if the player is actually holding it
+        // steal
         if (!player.IsHolding(objectController))
             return;
 

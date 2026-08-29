@@ -70,7 +70,7 @@ MonoBehaviour:
       audio: {fileID: 0}
       delayAfter: 0
       canBeInterrupted: 0
-    waitType: 1
+    waitType: 9
     timeout: 10
     responses:
     - eventType: 2
@@ -95,6 +95,16 @@ MonoBehaviour:
       taskUpdate:
         action: 0
         taskID: 
+    - eventType: 0
+      nextSequenceID: 11
+      dialogue:
+      - text: "Oh\u2026 Nice. I guess."
+        audio: {fileID: 0}
+        delayAfter: 0
+        canBeInterrupted: 0
+      taskUpdate:
+        action: 2
+        taskID: leverPuzzle
     taskUpdate:
       action: 0
       taskID: 
@@ -136,9 +146,9 @@ MonoBehaviour:
     taskUpdate:
       action: 0
       taskID: 
-  - sequenceID: 8
+  - sequenceID: 9
     dialogue:
-    - text: "1.. 2.. 3.. Hm\u2026?\r\n"
+    - text: I mean...
       audio: {fileID: 0}
       delayAfter: 0
       canBeInterrupted: 0
@@ -148,3 +158,71 @@ MonoBehaviour:
     taskUpdate:
       action: 0
       taskID: 
+  - sequenceID: 11
+    dialogue:
+    - text: I never said there are 3 of them, haven't I?
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 9
+    timeout: 10
+    responses:
+    - eventType: 2
+      nextSequenceID: 6
+      dialogue:
+      - text: Come on... it can't be that hard?
+        audio: {fileID: 0}
+        delayAfter: 0
+        canBeInterrupted: 0
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 0
+      nextSequenceID: 10
+      dialogue:
+      - text: Ah. Finally.
+        audio: {fileID: 0}
+        delayAfter: 0
+        canBeInterrupted: 0
+      taskUpdate:
+        action: 2
+        taskID: leverPuzzle
+    taskUpdate:
+      action: 0
+      taskID: 
+  - sequenceID: 11
+    dialogue:
+    - text: "Here we go! Wasn't that fun?\r"
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 0
+    responses: []
+    taskUpdate:
+      action: 4
+      taskID: leverPuzzle
+  - sequenceID: 12
+    dialogue:
+    - text: "Come on, let's move to the next room.\r"
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 0
+    responses: []
+    taskUpdate:
+      action: 4
+      taskID: leverPuzzle
+  - sequenceID: 13
+    dialogue:
+    - text: "It will be fun!\r"
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 1
+    responses: []
+    taskUpdate:
+      action: 4
+      taskID: leverPuzzle

@@ -12,6 +12,7 @@ public class NarratorController : MonoBehaviour
 
     public static NarratorController Instance { get; private set; }
 
+
     private bool waitForNextLine = false;
     private bool gameStart = false;
 
@@ -35,7 +36,7 @@ public class NarratorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if (Keyboard.current.enterKey.wasPressedThisFrame
                 || Mouse.current.leftButton.wasPressedThisFrame)
         {
@@ -150,7 +151,7 @@ public class NarratorController : MonoBehaviour
                     yield return new WaitForSeconds(current.timeout);
 
                     response = GetResponse(current, NarratorEvent.Timeout);
-                    if(response == null)
+                    if (response == null)
                         currentSequenceID = (++seq).ToString();
                     break;
 
@@ -209,12 +210,12 @@ public class NarratorController : MonoBehaviour
             if (response != null)
             {
                 ManageTask(response.taskUpdate);
-                yield return StartCoroutine( PlayResponse(response) );
+                yield return StartCoroutine(PlayResponse(response));
 
                 Debug.Log($"nextSequenceID: {response.nextSequenceID}");
                 currentSequenceID = response.nextSequenceID;
             }
-            
+
 
             //seq++;
         }
@@ -239,7 +240,7 @@ public class NarratorController : MonoBehaviour
             yield return new WaitUntil(() => narratorText.IsTyping == false);
             yield return new WaitForSeconds(.3f);
 
-            if(line.delayAfter > 0)
+            if (line.delayAfter > 0)
             {
                 yield return new WaitForSeconds(line.delayAfter);
             }
@@ -269,11 +270,11 @@ public class NarratorController : MonoBehaviour
     private IEnumerator WaitForPlayerToCompletePuzzle(NarratorSequence current)
     {
         playerCompletedPuzzle = false;
-        while(!playerCompletedPuzzle)
+        while (!playerCompletedPuzzle)
         {
             yield return null;
         }
-        
+
     }
 
     private void ManageTask(TaskUpdate taskEvent)
@@ -295,7 +296,7 @@ public class NarratorController : MonoBehaviour
                     TaskListManager.Instance.DisplayTask(taskEvent.taskID);
                     break;
             }
-            
+
         }
     }
 
@@ -303,6 +304,6 @@ public class NarratorController : MonoBehaviour
     {
         yield return new WaitUntil(() => narratorText.IsTyping == false);
         yield return new WaitForSeconds(time);
-        
+
     }
 }

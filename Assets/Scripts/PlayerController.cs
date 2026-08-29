@@ -57,12 +57,13 @@ public class PlayerController : MonoBehaviour
     public static bool CanMove { get; set; } = false;
 
     public static event System.Action OnPlayerJumped;
-    //public static event System.Action OnPlayerInteracted;
     public static event System.Action OnPlayerToggleLever;
-    //public static event System.Action OnPlayerPressButton;
 
+    public static PlayerController Instance { get; private set; }
     void Start()
     {
+        Instance = this;
+
         characterController = GetComponent<CharacterController>();
 
         //Cursor.lockState = CursorLockMode.Locked;

@@ -1,0 +1,244 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4349e484843754d80e44abd04a44f7, type: 3}
+  m_Name: pressure
+  m_EditorClassIdentifier: 
+  narratorID: PressurePlate
+  blocks:
+  - blockID: 1
+    runCondition: 0
+    dialogue:
+    - text: Now that you've pulled those levers,
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: this will test your skills, Player.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: You <b>won't</b> be able to leave this room until all the red plates
+        are activated.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Go on. I'm watching.
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 5
+    timeout: 10
+    responses:
+    - eventType: 0
+      dialogue: []
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 1
+      dialogue:
+      - text: Okay.. sure.
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 2
+      dialogue: []
+      nextBlockID: 4
+      taskUpdate:
+        action: 0
+        taskID: 
+    nextBlockID: 
+    taskUpdate:
+      action: 1
+      taskID: pressurePuzzle
+  - blockID: 2
+    runCondition: 1
+    dialogue:
+    - text: There we go. You know how it works.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: One down, three more to go, Player.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Shouldn't be that hard now, right?
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 6
+    timeout: 5
+    responses:
+    - eventType: 0
+      dialogue: []
+      nextBlockID: 3
+      taskUpdate:
+        action: 2
+        taskID: pressurePuzzle
+    - eventType: 1
+      dialogue:
+      - text: Okay.. sure.
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 3
+      taskUpdate:
+        action: 2
+        taskID: pressurePuzzle
+    - eventType: 2
+      dialogue: []
+      nextBlockID: 5
+      taskUpdate:
+        action: 0
+        taskID: 
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+  - blockID: 3
+    runCondition: 3
+    dialogue:
+    - text: You did it! The door should now be op-
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Oh.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Seems like the door <b>is</b> malfunctioning.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Sorry, Player. It <b>definitely</b> won't open.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: I suppose that is it, then.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: No need to check, really.
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+    nextBlockID: 
+    taskUpdate:
+      action: 4
+      taskID: pressurePuzzle
+  - blockID: 4
+    runCondition: 2
+    dialogue:
+    - text: What are you waiting for?
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Do you need another hint?
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: '// TODO: Helpful hint here'
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: ... Anyway
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Try again, Player.
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 5
+    timeout: 10
+    responses:
+    - eventType: 0
+      dialogue: []
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 1
+      dialogue: []
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 2
+      dialogue: []
+      nextBlockID: 4
+      taskUpdate:
+        action: 0
+        taskID: 
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+  - blockID: 5
+    runCondition: 1
+    dialogue:
+    - text: '*Soothing music playing in the background*'
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 6
+    timeout: 5
+    responses:
+    - eventType: 0
+      dialogue: []
+      nextBlockID: 3
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 1
+      dialogue: []
+      nextBlockID: 3
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 2
+      dialogue: []
+      nextBlockID: 5
+      taskUpdate:
+        action: 0
+        taskID: 
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 

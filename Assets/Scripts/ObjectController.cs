@@ -221,7 +221,6 @@ public class ObjectController : MonoBehaviour
                 audioSource.PlayOneShot(sfxDrop);
                 break;
             case PlayerAction.ToggleLever:
-                Debug.Log("Play SFX");
                 audioSource.PlayOneShot(sfxLever);
                 break;
             case PlayerAction.PressurePlate:

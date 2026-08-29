@@ -40,7 +40,7 @@ public enum NarratorWaitType
     PlayerCompleteLeverPuzzle,
     PlayerCompletePressurePlatePuzzle,
     CheckButtonPuzzle,
-    PlayerCompleteButtonPuzzle
+    PlayerCompleteButtonPuzzle,
 }
 
 [System.Serializable]
@@ -61,6 +61,7 @@ public class NarratorLine
     public AudioClip audio;
 
     public float delayAfter = 0f;
+
 
     public bool canBeInterrupted = true;
 }

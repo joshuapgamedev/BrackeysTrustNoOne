@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject settingMenu;
     [SerializeField] private GameObject controlsMenu;
     [SerializeField] private NarratorController narrator;
+    [SerializeField] private ScriptController script;
     // Start is called before the first frame update
     private bool isSettingOpen = false;
     private bool firstTime = true;
@@ -69,7 +70,8 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             //narrator.StartScript(narrator.welcomeScript);
-            PlayerController.CanMove = true;
+            script.StartScript(script.openingScript);
+            //PlayerController.CanMove = true;
             firstTime = false;
             
         }

@@ -1,0 +1,398 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4349e484843754d80e44abd04a44f7, type: 3}
+  m_Name: Button
+  m_EditorClassIdentifier: 
+  narratorID: Button
+  blocks:
+  - blockID: 1
+    runCondition: 0
+    dialogue:
+    - text: ... Alright.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Welcome.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Now, this should hopefully make you reconsider things.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Becuase we have..
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: BUTTONS.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: You know how scary <b>buttons</b> are.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: And I warn you... you don't want to test them.
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 8
+    timeout: 0
+    responses:
+    - eventType: 4
+      dialogue:
+      - text: How lucky..
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 5
+      dialogue:
+      - text: You're actually doing it...
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 3
+      taskUpdate:
+        action: 0
+        taskID: 
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+    randomResponse: 0
+  - blockID: 2
+    runCondition: 1
+    dialogue: []
+    waitType: 8
+    timeout: 0
+    responses:
+    - eventType: 4
+      dialogue:
+      - text: Wow..
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 1
+        taskID: buttonPuzzle
+    - eventType: 4
+      dialogue:
+      - text: Really?
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 1
+        taskID: buttonPuzzle
+    - eventType: 5
+      dialogue:
+      - text: 
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 3
+      taskUpdate:
+        action: 1
+        taskID: buttonPuzzle
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+    randomResponse: 1
+  - blockID: 3
+    runCondition: 5
+    dialogue:
+    - text: No. Not that one.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: There is an order, Player.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Fine.. I will help.
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 1
+    responses:
+    - eventType: 4
+      dialogue:
+      - text: Wow..
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 1
+        taskID: buttonPuzzle
+    - eventType: 4
+      dialogue:
+      - text: Really?
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 1
+        taskID: buttonPuzzle
+    - eventType: 5
+      dialogue:
+      - text: 
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 3
+      taskUpdate:
+        action: 1
+        taskID: buttonPuzzle
+    nextBlockID: 4
+    taskUpdate:
+      action: 1
+      taskID: buttonPuzzle
+    randomResponse: 0
+  - blockID: 4
+    runCondition: 5
+    dialogue:
+    - text: "The first button is\u2026"
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: ... blue.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: There. Easy.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: Now, the second button is...
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: ...
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: Wait, what colour was it?
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: Oh, right.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: Purple.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: The third one is...
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: definitely not yellow.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: ...Actually, no.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: It is yellow.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: And before the last one...
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: I just want to make sure you're <b>really</b> up to this.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: ... yeah? Okay...
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: Fine..
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 2
+      canBeInterrupted: 0
+    - text: It's red. Obviously.
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 8
+    timeout: 0
+    responses:
+    - eventType: 5
+      dialogue:
+      - text: Wow..
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 5
+      taskUpdate:
+        action: 1
+        taskID: buttonPuzzle
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+    randomResponse: 0
+  - blockID: 5
+    runCondition: 2
+    dialogue:
+    - text: Oh. You ran out of time.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: That seems like a you problem.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Again?
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+    nextBlockID: 4
+    taskUpdate:
+      action: 0
+      taskID: 
+    randomResponse: 0
+  - blockID: 6
+    runCondition: 2
+    dialogue:
+    - text: You were too slow.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: One more?
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+    nextBlockID: 4
+    taskUpdate:
+      action: 0
+      taskID: 
+    randomResponse: 0
+  - blockID: 7
+    runCondition: 2
+    dialogue:
+    - text: Hm. The buttons reset.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: You really do need to be faster than that, Player.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Again?
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+    nextBlockID: 4
+    taskUpdate:
+      action: 0
+      taskID: 
+    randomResponse: 0
+  - blockID: 8
+    runCondition: 3
+    dialogue:
+    - text: You did it...
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: You opened the door...
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Why...?
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: I thought we have fun together here.
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+    nextBlockID: 
+    taskUpdate:
+      action: 4
+      taskID: buttonPuzzle
+    randomResponse: 0
