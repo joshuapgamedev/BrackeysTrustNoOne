@@ -8,6 +8,7 @@ public class ScriptSO : ScriptableObject
     public string narratorID;
 
     public List<ScriptBlock> blocks;
+
 }
 
 [System.Serializable]
@@ -17,6 +18,8 @@ public class ScriptBlock
 
     // block triggered
     public ScriptRunCondition runCondition;
+
+    public bool allowRandomSelection = false;
 
     public List<ScriptLine> dialogue;
 

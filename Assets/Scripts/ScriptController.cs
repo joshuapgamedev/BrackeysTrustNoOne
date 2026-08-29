@@ -120,9 +120,13 @@ public class ScriptController : MonoBehaviour
 
         ScriptBlock block;
 
-        if (matchingBlocks.Count > 1)
+        bool canRandomize = matchingBlocks.Count > 1 && matchingBlocks.Exists(b => b.allowRandomSelection);
+
+        if (canRandomize)
         {
-            block = matchingBlocks[Random.Range(0, matchingBlocks.Count)];
+            var randomPool = matchingBlocks.FindAll(b => b.allowRandomSelection);
+
+            block = randomPool[Random.Range(0, randomPool.Count)];
         }
         else
         {

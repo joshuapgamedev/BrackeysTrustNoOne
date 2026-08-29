@@ -16,6 +16,7 @@ MonoBehaviour:
   blocks:
   - blockID: 1
     runCondition: 0
+    allowRandomSelection: 0
     dialogue:
     - text: ... Alright.
       audio: {fileID: 0}
@@ -84,6 +85,7 @@ MonoBehaviour:
     randomResponse: 0
   - blockID: 2
     runCondition: 1
+    allowRandomSelection: 0
     dialogue: []
     waitType: 8
     timeout: 0
@@ -128,6 +130,7 @@ MonoBehaviour:
     randomResponse: 1
   - blockID: 3
     runCondition: 5
+    allowRandomSelection: 0
     dialogue:
     - text: No. Not that one.
       audio: {fileID: 0}
@@ -187,6 +190,7 @@ MonoBehaviour:
     randomResponse: 0
   - blockID: 4
     runCondition: 5
+    allowRandomSelection: 0
     dialogue:
     - text: "The first button is\u2026"
       audio: {fileID: 0}
@@ -294,6 +298,7 @@ MonoBehaviour:
     randomResponse: 0
   - blockID: 5
     runCondition: 2
+    allowRandomSelection: 1
     dialogue:
     - text: Oh. You ran out of time.
       audio: {fileID: 0}
@@ -320,6 +325,7 @@ MonoBehaviour:
     randomResponse: 0
   - blockID: 6
     runCondition: 2
+    allowRandomSelection: 1
     dialogue:
     - text: You were too slow.
       audio: {fileID: 0}
@@ -341,6 +347,7 @@ MonoBehaviour:
     randomResponse: 0
   - blockID: 7
     runCondition: 2
+    allowRandomSelection: 1
     dialogue:
     - text: Hm. The buttons reset.
       audio: {fileID: 0}
@@ -367,6 +374,7 @@ MonoBehaviour:
     randomResponse: 0
   - blockID: 8
     runCondition: 3
+    allowRandomSelection: 0
     dialogue:
     - text: You did it...
       audio: {fileID: 0}

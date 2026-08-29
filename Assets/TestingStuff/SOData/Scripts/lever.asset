@@ -16,6 +16,7 @@ MonoBehaviour:
   blocks:
   - blockID: 1
     runCondition: 0
+    allowRandomSelection: 0
     dialogue:
     - text: 'Here is your first challenge.
 
@@ -88,8 +89,10 @@ MonoBehaviour:
     taskUpdate:
       action: 1
       taskID: leverPuzzle
+    randomResponse: 0
   - blockID: 2
     runCondition: 1
+    allowRandomSelection: 0
     dialogue:
     - text: "Hm.\r"
       audio: {fileID: 0}
@@ -149,7 +152,7 @@ MonoBehaviour:
         nextLineType: 1
         delayAfter: 1
         canBeInterrupted: 0
-      nextBlockID: 4
+      nextBlockID: 5
       taskUpdate:
         action: 0
         taskID: 
@@ -169,8 +172,10 @@ MonoBehaviour:
     taskUpdate:
       action: 0
       taskID: 
+    randomResponse: 0
   - blockID: 3
     runCondition: 3
+    allowRandomSelection: 0
     dialogue:
     - text: "Ah.\r"
       audio: {fileID: 0}
@@ -210,8 +215,10 @@ MonoBehaviour:
     taskUpdate:
       action: 4
       taskID: leverPuzzle
+    randomResponse: 0
   - blockID: 4
-    runCondition: 0
+    runCondition: 1
+    allowRandomSelection: 0
     dialogue:
     - text: "Chop chop, Player.\r"
       audio: {fileID: 0}
@@ -241,10 +248,12 @@ MonoBehaviour:
         taskID: 
     nextBlockID: 
     taskUpdate:
-      action: 4
-      taskID: leverPuzzle
+      action: 0
+      taskID: 
+    randomResponse: 0
   - blockID: 5
-    runCondition: 0
+    runCondition: 1
+    allowRandomSelection: 0
     dialogue:
     - text: 'Come on.. Almost there.
 
@@ -276,5 +285,6 @@ MonoBehaviour:
         taskID: 
     nextBlockID: 
     taskUpdate:
-      action: 4
-      taskID: leverPuzzle
+      action: 0
+      taskID: 
+    randomResponse: 0
