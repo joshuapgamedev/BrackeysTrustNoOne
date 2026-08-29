@@ -41,7 +41,7 @@ public class ObjectController : MonoBehaviour
     private MeshRenderer mr;
     private bool isInRange = false;
     private Color oriColor;
-    private Color inRangeColor;
+    //private Color inRangeColor;
 
     private bool isActivated = false;
 
@@ -87,7 +87,7 @@ public class ObjectController : MonoBehaviour
         }
 
         oriColor = mr.material.color;
-        inRangeColor = new Color32(255, 133, 28, 255);
+        //inRangeColor = new Color32(255, 133, 28, 255);
 
         audioSource = GetComponent<AudioSource>();
 
@@ -98,8 +98,8 @@ public class ObjectController : MonoBehaviour
     {
         if(isInRange)
         {
-            if(!gameObject.CompareTag("PressurePlate"))
-                mr.material.color = inRangeColor;
+            //if(!gameObject.CompareTag("PressurePlate"))
+                //mr.material.color = inRangeColor;
         }
         else
         {
