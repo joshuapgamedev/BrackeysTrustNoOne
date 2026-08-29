@@ -28,6 +28,9 @@ public class ObjectController : MonoBehaviour
     [SerializeField] public PuzzleRoomType roomType;
     [SerializeField] public string objectId;
 
+    [SerializeField] private Transform holdPoint;
+    public Transform HoldPoint => holdPoint;
+
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip sfxPickup;
     [SerializeField] private AudioClip sfxDrop;

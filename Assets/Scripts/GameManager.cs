@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject settingMenu;
+    [SerializeField] private GameObject controlsMenu;
     [SerializeField] private NarratorController narrator;
     // Start is called before the first frame update
     private bool isSettingOpen = false;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        controlsMenu.SetActive(true);
         Time.timeScale = 0.0f;
     }
 

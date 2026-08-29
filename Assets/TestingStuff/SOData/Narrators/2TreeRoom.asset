@@ -10,63 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3332da299460ec941aae8be0f48531c1, type: 3}
-  m_Name: 1Welcome
+  m_Name: 2TreeRoom
   m_EditorClassIdentifier: 
-  narratorID: 1_welcome
+  narratorID: treeRoom
   sequences:
   - sequenceID: 1
     dialogue:
-    - text: Hello! Welcome to the <b>complete final revised build</b> of the game
-        (version 1(15) delete this later)
+    - text: 'Anyway, why don''t we stop here for a moment to appreciate this cool
+        tree? '
       audio: {fileID: 0}
       delayAfter: 0
       canBeInterrupted: 0
     waitType: 4
     timeout: 0
-    responses: []
+    responses:
+    - eventType: 0
+      nextSequenceID: 
+      dialogue: []
+      taskUpdate:
+        action: 0
+        taskID: 
     taskUpdate:
       action: 0
       taskID: 
   - sequenceID: 2
     dialogue:
-    - text: How exciting!
-      audio: {fileID: 0}
-      delayAfter: 0
-      canBeInterrupted: 0
-    waitType: 4
-    timeout: 0
-    responses: []
-    taskUpdate:
-      action: 0
-      taskID: 
-  - sequenceID: 3
-    dialogue:
-    - text: Before you actually play the game you must complete the tutorial... like
-        every good game has
-      audio: {fileID: 0}
-      delayAfter: 0
-      canBeInterrupted: 0
-    waitType: 4
-    timeout: 0
-    responses: []
-    taskUpdate:
-      action: 0
-      taskID: 
-  - sequenceID: 4
-    dialogue:
-    - text: Are you ready?
-      audio: {fileID: 0}
-      delayAfter: 0
-      canBeInterrupted: 0
-    waitType: 1
-    timeout: 0.3
-    responses: []
-    taskUpdate:
-      action: 0
-      taskID: 
-  - sequenceID: 5
-    dialogue:
-    - text: 'Great!
+    - text: 'Its name is Bert, by the way.
 
 '
       audio: {fileID: 0}
@@ -74,19 +43,49 @@ MonoBehaviour:
       canBeInterrupted: 0
     waitType: 4
     timeout: 0
-    responses: []
+    responses:
+    - eventType: 0
+      nextSequenceID: 
+      dialogue: []
+      taskUpdate:
+        action: 0
+        taskID: 
     taskUpdate:
       action: 0
       taskID: 
-  - sequenceID: 6
+  - sequenceID: 3
     dialogue:
-    - text: "Move on to the next room when you're ready.\r"
+    - text: Look at those leaf! Aren't they so delicated?
       audio: {fileID: 0}
       delayAfter: 0
       canBeInterrupted: 0
-    waitType: 0
-    timeout: 2
-    responses: []
+    waitType: 4
+    timeout: 0
+    responses:
+    - eventType: 0
+      nextSequenceID: 
+      dialogue: []
+      taskUpdate:
+        action: 0
+        taskID: 
     taskUpdate:
-      action: 1
-      taskID: moveToLever
+      action: 0
+      taskID: 
+  - sequenceID: 4
+    dialogue:
+    - text: And the branch...
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 0
+    responses:
+    - eventType: 0
+      nextSequenceID: 
+      dialogue: []
+      taskUpdate:
+        action: 0
+        taskID: 
+    taskUpdate:
+      action: 0
+      taskID: 
