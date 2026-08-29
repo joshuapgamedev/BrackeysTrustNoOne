@@ -23,9 +23,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform handPos;
     [SerializeField] private LayerMask groundLayer;
 
+    /*
     [Header("Health")]
     [SerializeField] private float maxHealth = 5f;
     [SerializeField] private TextMeshProUGUI healthText;
+    */
 
     [Header("UI")]
     [SerializeField] private GameObject crosshair;
@@ -66,8 +68,8 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        health = maxHealth;
-        UpdateHealthText();
+        //health = maxHealth;
+        //UpdateHealthText();
 
     }
 
@@ -189,6 +191,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /*
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Danger"))
@@ -201,6 +204,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    */
 
 
     private void HoldingObject()
@@ -261,6 +265,7 @@ public class PlayerController : MonoBehaviour
         isHoldingObject = false;
     }
 
+    /*
     private void TakeDamage(float amount)
     {
         health = Mathf.Clamp(health - amount, 0, maxHealth);
@@ -278,6 +283,7 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    
 
     private IEnumerator RegeneratingHealth()
     {
@@ -298,7 +304,7 @@ public class PlayerController : MonoBehaviour
     {
         healthText.text = health.ToString();
     }
-
+    */
     private void ToggleObject()
     {
         StartCoroutine(ToggleCrosshairForSecond());
