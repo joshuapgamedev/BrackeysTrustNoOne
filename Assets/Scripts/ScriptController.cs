@@ -11,6 +11,8 @@ public class ScriptController : MonoBehaviour
     [SerializeField] private GameObject narratorBox;
     [SerializeField] private TypewriterEffect narratorText;
 
+    [SerializeField] private AudioSource narratorAudioSource;
+
     private ScriptSO currentScript;
     private Coroutine currentRoutine;
 
@@ -155,6 +157,11 @@ public class ScriptController : MonoBehaviour
             narratorText.SkipToEnd();
         }
 
+        if (narratorAudioSource.isPlaying)
+        {
+            narratorAudioSource.Stop();
+        }
+
         currentRoutine = StartCoroutine(PlayBlockChain(block));
     }
 
@@ -244,6 +251,13 @@ public class ScriptController : MonoBehaviour
     private IEnumerator PlayLine(ScriptLine line)
     {
         narratorBox.SetActive(true);
+
+        if (line.audio != null)
+        {
+            narratorAudioSource.Stop();
+            narratorAudioSource.clip = line.audio;
+            narratorAudioSource.Play();
+        }
 
         narratorText.ShowText(line.text);
 
