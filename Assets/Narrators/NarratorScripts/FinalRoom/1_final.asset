@@ -18,29 +18,18 @@ MonoBehaviour:
     runCondition: 0
     allowRandomSelection: 0
     dialogue:
-    - text: 'Oh.
+    - text: 'Wait why is there a green button.
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: cbe5bcf42ac37d74a8e7fd1415574d50, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
-    - text: Is that a green button?
-      audio: {fileID: 0}
+    - text: Look i'll level with you... the button its a button that kills you...
+        (Narrator is stalling)
+      audio: {fileID: 8300000, guid: d3dae698fbd922b439fee9809182c6b2, type: 3}
       nextLineType: 1
       delayAfter: 1
-      canBeInterrupted: 0
-    - text: 'That looks like a perfectly <b>normal</b> button to me.
-
-'
-      audio: {fileID: 0}
-      nextLineType: 1
-      delayAfter: 1
-      canBeInterrupted: 0
-    - text: Nothing interesting here, Player.
-      audio: {fileID: 0}
-      nextLineType: 0
-      delayAfter: 0
       canBeInterrupted: 0
     waitType: 0
     timeout: 0
