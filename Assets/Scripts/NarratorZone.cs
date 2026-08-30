@@ -37,6 +37,7 @@ public class NarratorZone : MonoBehaviour
             return;
 
         //NarratorController.Instance.PlayerLeftTrigger();
+        ScriptController.Instance?.NotifyPlayerLeftTrigger();
     }
 
     private PuzzleRoomType GetRoomType(string narratorID)
