@@ -492,6 +492,10 @@ PrefabInstance:
       value: Confetti Line
       objectReference: {fileID: 0}
     - target: {fileID: 4341076081983464816, guid: 547b9a86c61dca64dae6b645d190bf7f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.29320917
+      objectReference: {fileID: 0}
+    - target: {fileID: 4341076081983464816, guid: 547b9a86c61dca64dae6b645d190bf7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.021707416
       objectReference: {fileID: 0}
