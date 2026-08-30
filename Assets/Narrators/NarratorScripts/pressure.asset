@@ -74,17 +74,17 @@ MonoBehaviour:
     allowRandomSelection: 0
     dialogue:
     - text: There we go. You know how it works.
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: cc94f31801c70424bbf09879d4e1f3f0, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: One down, three more to go, Player.
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: f356c2f06c2b82c45a01deb77b6159c4, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: Shouldn't be that hard now, right?
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 03cf55264b6d61f4f8032c23bcd4cf26, type: 3}
       nextLineType: 0
       delayAfter: 0
       canBeInterrupted: 0
@@ -124,22 +124,17 @@ MonoBehaviour:
     allowRandomSelection: 0
     dialogue:
     - text: You did it! The door should now be op-
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 8405f365be476bd4fb399ded79708616, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
-    - text: Oh.
-      audio: {fileID: 0}
-      nextLineType: 1
-      delayAfter: 1
-      canBeInterrupted: 0
-    - text: Seems like the door <b>is</b> malfunctioning.
-      audio: {fileID: 0}
+    - text: Oh... Seems like the door <b>is</b> malfunctioning.
+      audio: {fileID: 8300000, guid: 2802d2238864c2549a25981e76dabc1b, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: Sorry, Player. It <b>definitely</b> won't open.
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 97a1d6e58a4192946b6e284b618c17b2, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
@@ -165,13 +160,8 @@ MonoBehaviour:
     runCondition: 2
     allowRandomSelection: 0
     dialogue:
-    - text: What are you waiting for?
-      audio: {fileID: 0}
-      nextLineType: 1
-      delayAfter: 1
-      canBeInterrupted: 0
-    - text: Do you need another hint?
-      audio: {fileID: 0}
+    - text: what are you waiting for... Do you need another hint?
+      audio: {fileID: 8300000, guid: 0607c07536c59b349837163662086add, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
@@ -181,12 +171,12 @@ MonoBehaviour:
       delayAfter: 1
       canBeInterrupted: 0
     - text: ... Anyway
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 92d12812e87969a499016d0ad1411419, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: Try again, Player.
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: cad1ed241ada43847906af6d945f82ec, type: 3}
       nextLineType: 0
       delayAfter: 0
       canBeInterrupted: 0
@@ -220,7 +210,7 @@ MonoBehaviour:
     runCondition: 1
     allowRandomSelection: 0
     dialogue:
-    - text: '*Soothing music playing in the background*'
+    - text: 
       audio: {fileID: 0}
       nextLineType: 0
       delayAfter: 0
