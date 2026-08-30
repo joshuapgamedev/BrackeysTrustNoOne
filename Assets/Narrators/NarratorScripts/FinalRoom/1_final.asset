@@ -23,13 +23,13 @@ MonoBehaviour:
 '
       audio: {fileID: 8300000, guid: cbe5bcf42ac37d74a8e7fd1415574d50, type: 3}
       nextLineType: 1
-      delayAfter: 1
+      delayAfter: 2
       canBeInterrupted: 0
     - text: Look i'll level with you... the button its a button that kills you...
         (Narrator is stalling)
       audio: {fileID: 8300000, guid: d3dae698fbd922b439fee9809182c6b2, type: 3}
       nextLineType: 1
-      delayAfter: 1
+      delayAfter: 29
       canBeInterrupted: 0
     waitType: 0
     timeout: 0

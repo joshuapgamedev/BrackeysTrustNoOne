@@ -23,7 +23,7 @@ MonoBehaviour:
 '
       audio: {fileID: 8300000, guid: c076840f166ebaa48b1eb6f5467aa749, type: 3}
       nextLineType: 2
-      delayAfter: 0
+      delayAfter: 6
       canBeInterrupted: 0
     - text: 'How exciting.
 

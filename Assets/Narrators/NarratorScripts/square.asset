@@ -22,7 +22,7 @@ MonoBehaviour:
         be difficult for you.
       audio: {fileID: 8300000, guid: d9a0ca4a13169f94bae1d708caab7eae, type: 3}
       nextLineType: 1
-      delayAfter: 1
+      delayAfter: 6
       canBeInterrupted: 0
     - text: And I won't be giving you hint anymore.
       audio: {fileID: 8300000, guid: 447b27195179ec646bf7f71ca454336a, type: 3}
