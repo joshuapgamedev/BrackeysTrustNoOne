@@ -119,13 +119,8 @@ MonoBehaviour:
     runCondition: 3
     allowRandomSelection: 0
     dialogue:
-    - text: 'You finished the <b>totally</b> not broken puzzle room... '
-      audio: {fileID: 0}
-      nextLineType: 1
-      delayAfter: 1
-      canBeInterrupted: 0
-    - text: Congratulation.
-      audio: {fileID: 0}
+    - text: You finished the <b>totally</b> not broken puzzle room... Congratulation.
+      audio: {fileID: 8300000, guid: 5319a6ee966da2243b626ea9cc05983d, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
