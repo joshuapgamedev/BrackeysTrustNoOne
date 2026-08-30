@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject settingMenu;
     [SerializeField] private GameObject controlsMenu;
-    [SerializeField] private NarratorController narrator;
+    //[SerializeField] private NarratorController narrator;
     [SerializeField] private ScriptController script;
     // Start is called before the first frame update
     private bool isSettingOpen = false;
