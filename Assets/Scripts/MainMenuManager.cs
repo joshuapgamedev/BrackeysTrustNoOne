@@ -19,7 +19,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnStartButtonPressed()
     {
-        SceneManager.LoadScene("TestingScene");
+        SceneManager.LoadScene("MainGame");
     }
 
     public void OnExitButtonPressed()
