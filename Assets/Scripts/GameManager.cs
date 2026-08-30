@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     public void OnQuitButtonPressed()
     {
-        SceneManager.LoadScene("Game_Over");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void OnControlsMenuClose()

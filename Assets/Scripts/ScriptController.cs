@@ -532,7 +532,7 @@ public class ScriptController : MonoBehaviour
 
                 Debug.Log("Green button pressed - FINAL");
 
-                SceneManager.LoadScene("");
+                SceneManager.LoadScene("Game_Over");
                 //TriggerCondition(ScriptRunCondition.Completed);
                 //change the scene
                 break;
