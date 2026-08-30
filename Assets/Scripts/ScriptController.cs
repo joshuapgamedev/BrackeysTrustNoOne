@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class ScriptController : MonoBehaviour
 {
@@ -531,6 +532,7 @@ public class ScriptController : MonoBehaviour
 
                 Debug.Log("Green button pressed - FINAL");
 
+                SceneManager.LoadScene("");
                 //TriggerCondition(ScriptRunCondition.Completed);
                 //change the scene
                 break;
