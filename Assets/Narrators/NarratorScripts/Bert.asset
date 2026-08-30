@@ -34,9 +34,20 @@ MonoBehaviour:
       nextLineType: 1
       delayAfter: 158
       canBeInterrupted: 0
-    waitType: 0
+    waitType: 9
     timeout: 0
-    responses: []
+    responses:
+    - eventType: 3
+      dialogue:
+      - text: Bert will miss you
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 
+      taskUpdate:
+        action: 0
+        taskID: 
     nextBlockID: 
     taskUpdate:
       action: 0

@@ -18,7 +18,7 @@ MonoBehaviour:
     runCondition: 0
     allowRandomSelection: 0
     dialogue:
-    - text: Wait.. Is it left.. Or right?
+    - text: do you go.. left.. Or do you go right?
       audio: {fileID: 8300000, guid: cbd309e781bd0ce4b885ab7bf0c02da2, type: 3}
       nextLineType: 1
       delayAfter: 1
