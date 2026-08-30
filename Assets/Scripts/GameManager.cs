@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("test");
         controlsMenu.SetActive(true);
         Time.timeScale = 0.0f;
     }

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4349e484843754d80e44abd04a44f7, type: 3}
+  m_Name: 1_enterTreeRoom
+  m_EditorClassIdentifier: 
+  narratorID: 1_enterTreeRoom
+  blocks:
+  - blockID: 1
+    runCondition: 0
+    allowRandomSelection: 0
+    dialogue:
+    - text: Anyway.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Why don't we stop here for a moment to appreciate this cool tree?
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: 'Its name is Bert, by the way.
+
+'
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+    randomResponse: 0
