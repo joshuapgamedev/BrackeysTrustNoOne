@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NarratorZone : MonoBehaviour
 {
-    [SerializeField] public NarratorSO narrator;
+    //[SerializeField] public NarratorSO narrator;
     [SerializeField] public ScriptSO script;
     [SerializeField] private bool canTriggerAgain = false;
 
