@@ -364,13 +364,17 @@ public class PlayerController : MonoBehaviour
     private void ToggleObject()
     {
         StartCoroutine(ToggleCrosshairForSecond());
+        /*
         // very temp logic
         if (currentFocus.transform.localEulerAngles.z < 300 )
             currentFocus.transform.localEulerAngles = new Vector3(0f, 0f, -45f);
         else if (currentFocus.transform.localEulerAngles.z > 300)
             currentFocus.transform.localEulerAngles = new Vector3(0f, 0f, 45f);
+        */
 
         currentFocus.Activated();
+        currentFocus.ToggleLeverAnimation();
+
         OnPlayerToggleLever?.Invoke();
         currentFocus.PlaySFX(PlayerAction.ToggleLever);
     }

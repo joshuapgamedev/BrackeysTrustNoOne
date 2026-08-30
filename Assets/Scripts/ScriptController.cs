@@ -203,6 +203,8 @@ public class ScriptController : MonoBehaviour
 
             response = ResolveResponse(current);
 
+            interruptDialogue = false;
+
             // response
             string nextBlockID = current.nextBlockID;
 
@@ -261,9 +263,75 @@ public class ScriptController : MonoBehaviour
 
         narratorText.ShowText(line.text);
 
-        // typewriter
-        yield return new WaitUntil(() => !narratorText.IsTyping);
+        while (narratorText.IsTyping && !interruptDialogue)
+        {
+            yield return null;
+        }
 
+        if (interruptDialogue)
+        {
+            narratorAudioSource.Stop();
+            yield break;
+        }
+
+        // typewriter
+        //yield return new WaitUntil(() => !narratorText.IsTyping);
+
+        switch (line.nextLineType)
+        {
+            case ScriptNextLineType.None:
+                {
+                    float timer = 0f;
+
+                    while (timer < 1f && !interruptDialogue)
+                    {
+                        timer += Time.deltaTime;
+                        yield return null;
+                    }
+
+                    if (interruptDialogue)
+                        yield break;
+
+                    narratorBox.SetActive(false);
+                    break;
+                }
+
+
+            case ScriptNextLineType.Timer:
+                {
+                    float timer = 0f;
+
+                    while (timer < line.delayAfter && !interruptDialogue)
+                    {
+                        timer += Time.deltaTime;
+                        yield return null;
+                    }
+
+                    if (interruptDialogue)
+                        yield break;
+
+                    break;
+                }
+
+
+            case ScriptNextLineType.NextLineTrigger:
+                {
+                    waitForNextLine = true;
+
+                    while (waitForNextLine && !interruptDialogue)
+                    {
+                        yield return null;
+                    }
+
+                    waitForNextLine = false;
+
+                    if (interruptDialogue)
+                        yield break;
+
+                    break;
+                }
+        }
+        /*
         switch (line.nextLineType)
         {
             case ScriptNextLineType.None:
@@ -295,7 +363,7 @@ public class ScriptController : MonoBehaviour
 
                 break;
         }
-
+        */
 
     }
 
@@ -416,6 +484,8 @@ public class ScriptController : MonoBehaviour
             case ScriptWaitType.PlayerCompleteLeverPuzzle:
                 return playerActionCompleted;
 
+            case ScriptWaitType.PlayerLeaveTrigger:
+                return playerLeftTrigger;
         }
 
         return false;
@@ -531,5 +601,19 @@ public class ScriptController : MonoBehaviour
     private void HandleButtonPuzzleExpired()
     {
         TriggerCondition(ScriptRunCondition.Failed);
+    }
+
+    public void NotifyPlayerLeftTrigger()
+    {
+        if (currentWaitType != ScriptWaitType.PlayerLeaveTrigger)
+            return;
+
+        playerLeftTrigger = true;
+        interruptDialogue = true;
+
+        if (narratorAudioSource.isPlaying)
+        {
+            narratorAudioSource.Stop();
+        }
     }
 }
