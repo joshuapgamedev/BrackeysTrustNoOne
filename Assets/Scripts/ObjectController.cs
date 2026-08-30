@@ -38,6 +38,9 @@ public class ObjectController : MonoBehaviour
     [SerializeField] private AudioClip sfxPressurePlate;
     [SerializeField] private AudioClip sfxButton;
 
+    [SerializeField] private GameObject leverUp;
+    [SerializeField] private GameObject leverDown;
+
     private MeshRenderer mr;
     private bool isInRange = false;
     private Color oriColor;
@@ -45,7 +48,7 @@ public class ObjectController : MonoBehaviour
 
     private bool isActivated = false;
 
-    private Animator buttonAnimator;
+    private Animator animator;
 
     // pressure plate
     private Transform plateButton = null;
@@ -74,21 +77,28 @@ public class ObjectController : MonoBehaviour
         {
             isButton = true;
             cooldownTimer = cooldownTime;
-            buttonAnimator = transform.parent.GetComponent<Animator>();
+            animator = transform.parent.GetComponent<Animator>();
         }
 
-        
+        if(gameObject.CompareTag("Toggleable"))
+        {
+            //leverUpPos = transform.localPosition;
+            //leverDownPos = new Vector3(-110.497f, transform.localPosition.y, transform.localPosition.z);
+            animator = transform.parent.GetComponent<Animator>();
+        }
+
         if (gameObject.CompareTag("PressurePlate"))
         {
             mr = plateButton.GetComponent<MeshRenderer>();
+            oriColor = mr.material.color;
             plateButtonActivatedColor = Color.green;
         }
         else
         {
-            mr = GetComponent<MeshRenderer>();
+            //mr = GetComponent<MeshRenderer>();
         }
 
-        oriColor = mr.material.color;
+        //oriColor = mr.material.color;
         //inRangeColor = new Color32(255, 133, 28, 255);
 
         audioSource = GetComponent<AudioSource>();
@@ -105,8 +115,10 @@ public class ObjectController : MonoBehaviour
         }
         else
         {
+            /*
             if (!gameObject.CompareTag("PressurePlate"))
                 mr.material.color = oriColor;
+            */
         }
 
         // very temp logic
@@ -139,6 +151,39 @@ public class ObjectController : MonoBehaviour
     public void Activated()
     {
         isActivated = !isActivated;
+    }
+
+    public void ToggleLeverAnimation()
+    {
+
+        StartCoroutine(WaitForAnimation());
+    }
+
+    private IEnumerator WaitForAnimation()
+    {
+        if (isActivated)
+        {
+            animator.SetBool("turningOn", true);
+            
+        }
+        else
+        {
+            animator.SetBool("turningOn", false);
+        }
+
+        yield return new WaitForSeconds(1);
+        /*
+        if(isActivated)
+        {
+            leverUp.SetActive(false);
+            leverDown.SetActive(true);
+        }
+        else
+        {
+            leverUp.SetActive( true);
+            leverDown.SetActive(false);
+        }*/
+       
     }
 
     private void OnTriggerStay(Collider other)
@@ -200,7 +245,7 @@ public class ObjectController : MonoBehaviour
 
         //transform.localPosition = new Vector3(transform.localPosition.x, .3f, transform.localPosition.z);
 
-        buttonAnimator.SetTrigger("Press");
+        animator.SetTrigger("Press");
 
         OnPressButton?.Invoke(this);
     }
