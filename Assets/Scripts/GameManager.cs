@@ -17,9 +17,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Debug.Log("test");
-        //controlsMenu.SetActive(true);
-        //Time.timeScale = 0.0f;
-        script.StartScript(script.openingScript);
+        controlsMenu.SetActive(true);
+        Time.timeScale = 0.0f;
+        //script.StartScript(script.openingScript);
     }
 
     // Update is called once per frame
