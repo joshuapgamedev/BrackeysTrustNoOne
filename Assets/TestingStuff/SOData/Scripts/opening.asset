@@ -16,6 +16,7 @@ MonoBehaviour:
   blocks:
   - blockID: 1
     runCondition: 0
+    allowRandomSelection: 0
     dialogue:
     - text: 'Hello! Welcome to the complete final revised build of the game. (version
         1(15) delete this later)
@@ -68,3 +69,4 @@ MonoBehaviour:
     taskUpdate:
       action: 0
       taskID: 
+    randomResponse: 0
