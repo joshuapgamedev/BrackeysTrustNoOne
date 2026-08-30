@@ -526,6 +526,14 @@ public class ScriptController : MonoBehaviour
                 }
 
                 break;
+
+            case PuzzleRoomType.Final:
+
+                Debug.Log("Green button pressed - FINAL");
+
+                //TriggerCondition(ScriptRunCondition.Completed);
+                //change the scene
+                break;
         }
     }
 

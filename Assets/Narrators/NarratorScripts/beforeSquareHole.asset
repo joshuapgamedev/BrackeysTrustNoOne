@@ -19,7 +19,7 @@ MonoBehaviour:
     allowRandomSelection: 0
     dialogue:
     - text: Oh, you are still here?
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: d1d3ee6fa6e667b40811bd3b27aec90a, type: 3}
       nextLineType: 0
       delayAfter: 0
       canBeInterrupted: 0

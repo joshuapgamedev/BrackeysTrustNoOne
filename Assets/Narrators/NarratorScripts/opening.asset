@@ -18,18 +18,17 @@ MonoBehaviour:
     runCondition: 0
     allowRandomSelection: 0
     dialogue:
-    - text: 'Hello! Welcome to the complete final revised build of the game. (version
-        1(15) delete this later)
+    - text: 'Hello! Welcome to the final revised build of the game. version 1(15)
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: c076840f166ebaa48b1eb6f5467aa749, type: 3}
       nextLineType: 2
       delayAfter: 0
       canBeInterrupted: 0
     - text: 'How exciting.
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 44ba5121636133a4c86ffa0fd2ab53a3, type: 3}
       nextLineType: 2
       delayAfter: 0
       canBeInterrupted: 0
@@ -37,28 +36,28 @@ MonoBehaviour:
         like every good game has
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 2d274da6690a89840b4e2368e486b845, type: 3}
       nextLineType: 2
       delayAfter: 0
       canBeInterrupted: 0
     - text: 'Are you ready?
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 55770187e9e0ae243966523cccda145d, type: 3}
       nextLineType: 1
       delayAfter: 0.5
       canBeInterrupted: 0
     - text: 'Great!
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 58a134f916e443345b12717399693c4e, type: 3}
       nextLineType: 2
       delayAfter: 0
       canBeInterrupted: 0
     - text: 'Move on to the next room when you''re ready.
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: abec8f19497d1a44bb01a84e98b0d4bd, type: 3}
       nextLineType: 2
       delayAfter: 0
       canBeInterrupted: 0

@@ -16,21 +16,12 @@ MonoBehaviour:
   blocks:
   - blockID: 1
     runCondition: 0
+    allowRandomSelection: 0
     dialogue:
-    - text: Wait..
-      audio: {fileID: 0}
+    - text: do you go.. left.. Or do you go right?
+      audio: {fileID: 8300000, guid: cbd309e781bd0ce4b885ab7bf0c02da2, type: 3}
       nextLineType: 1
       delayAfter: 1
-      canBeInterrupted: 0
-    - text: Is it left..
-      audio: {fileID: 0}
-      nextLineType: 1
-      delayAfter: 1
-      canBeInterrupted: 0
-    - text: Or right?
-      audio: {fileID: 0}
-      nextLineType: 0
-      delayAfter: 0
       canBeInterrupted: 0
     waitType: 0
     timeout: 0
@@ -39,3 +30,4 @@ MonoBehaviour:
     taskUpdate:
       action: 0
       taskID: 
+    randomResponse: 0

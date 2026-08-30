@@ -9,6 +9,12 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private List<ObjectController> pressurePlates;
     [SerializeField] private List<ObjectController> buttons;
     [SerializeField] private int requiredShapes = 3;
+    [SerializeField] private ObjectController greenButton;
+
+    [Header("Doors")]
+    [SerializeField] private Animator leverDoor;
+    [SerializeField] private Animator pressurePlateDoor;
+    [SerializeField] private Animator squareHoleDoor;
 
     private PuzzleRoomType currentPuzzle;
 
@@ -104,6 +110,7 @@ public class PuzzleManager : MonoBehaviour
         if (activatedCount == levers.Count)
         {
             //OnPlayerCompletedPuzzle?.Invoke();
+            OpenDoor(PuzzleRoomType.Lever);
             OnPuzzleCompleted?.Invoke(PuzzleRoomType.Lever);
             Debug.Log("Lever completed");
         }
@@ -124,6 +131,8 @@ public class PuzzleManager : MonoBehaviour
         {
             //OnPlayerCompletedPuzzle?.Invoke();
             //OnPuzzleCompleted?.Invoke(PuzzleRoomType.PressurePlate);
+
+            OpenDoor(PuzzleRoomType.PressurePlate);
 
             Debug.Log("Pressure plate puzzle completed");
         }
@@ -183,6 +192,21 @@ public class PuzzleManager : MonoBehaviour
 
     private void CheckButtonPuzzleOrder(ObjectController pressedButton)
     {
+        Debug.Log($"currentPuzzle {currentPuzzle}");
+        if (currentPuzzle == PuzzleRoomType.Final)
+        {
+            
+            if (pressedButton == greenButton)
+            {
+                Debug.Log("GREEN BUTTON PRESSED!");
+
+                OnPuzzleCompleted?.Invoke(PuzzleRoomType.Final);
+            }
+
+            return;
+        }
+
+
         if (currentPuzzle != PuzzleRoomType.Button)
             return;
 
@@ -262,6 +286,7 @@ public class PuzzleManager : MonoBehaviour
         if (insertedShapeCount >= requiredShapes)
         {
             squareHoleCompleted = true;
+            OpenDoor(PuzzleRoomType.SquareHole);
 
             Debug.Log("Square hole puzzle completed!");
 
@@ -301,6 +326,27 @@ public class PuzzleManager : MonoBehaviour
         return count;
     }
 
+    private void OpenDoor(PuzzleRoomType puzzleType)
+    {
+        switch (puzzleType)
+        {
+            case PuzzleRoomType.Lever:
+                //leverDoor.SetActive(false);
+                leverDoor.SetTrigger("openDoor");
+                break;
+
+            case PuzzleRoomType.PressurePlate:
+                pressurePlateDoor.SetTrigger("openDoor");
+                //pressurePlateDoor.SetActive(false);
+                break;
+
+            case PuzzleRoomType.SquareHole:
+                squareHoleDoor.SetTrigger("openDoor");
+                //squareHoleDoor.SetActive(false);
+                break;
+
+        }
+    }
 
 
 }

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("test");
         controlsMenu.SetActive(true);
         Time.timeScale = 0.0f;
+        //script.StartScript(script.openingScript);
     }
 
     // Update is called once per frame
