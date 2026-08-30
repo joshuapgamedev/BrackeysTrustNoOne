@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3332da299460ec941aae8be0f48531c1, type: 3}
+  m_Name: 2TreeRoom
+  m_EditorClassIdentifier: 
+  narratorID: treeRoom
+  sequences:
+  - sequenceID: 1
+    dialogue:
+    - text: 'Anyway, why don''t we stop here for a moment to appreciate this cool
+        tree? '
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 0
+    responses:
+    - eventType: 0
+      nextSequenceID: 
+      dialogue: []
+      taskUpdate:
+        action: 0
+        taskID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+  - sequenceID: 2
+    dialogue:
+    - text: 'Its name is Bert, by the way.
+
+'
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 0
+    responses:
+    - eventType: 0
+      nextSequenceID: 
+      dialogue: []
+      taskUpdate:
+        action: 0
+        taskID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+  - sequenceID: 3
+    dialogue:
+    - text: Look at those leaf! Aren't they so delicated?
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 0
+    responses:
+    - eventType: 0
+      nextSequenceID: 
+      dialogue: []
+      taskUpdate:
+        action: 0
+        taskID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+  - sequenceID: 4
+    dialogue:
+    - text: And the branch...
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 0
+    responses:
+    - eventType: 0
+      nextSequenceID: 
+      dialogue: []
+      taskUpdate:
+        action: 0
+        taskID: 
+    taskUpdate:
+      action: 0
+      taskID: 

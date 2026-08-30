@@ -4,6 +4,15 @@ using System.Linq.Expressions;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum PlayerAction
+{
+    ToggleLever,
+    Pickup,
+    Drop,
+    PressurePlate,
+    PressButton
+}
+
 public enum PuzzleRoomType
 {
     Lever, 
@@ -19,26 +28,36 @@ public class ObjectController : MonoBehaviour
     [SerializeField] public PuzzleRoomType roomType;
     [SerializeField] public string objectId;
 
+    [SerializeField] private Transform holdPoint;
+    public Transform HoldPoint => holdPoint;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip sfxPickup;
+    [SerializeField] private AudioClip sfxDrop;
+    [SerializeField] private AudioClip sfxLever;
+    [SerializeField] private AudioClip sfxPressurePlate;
+    [SerializeField] private AudioClip sfxButton;
+
     private MeshRenderer mr;
     private bool isInRange = false;
     private Color oriColor;
-    private Color inRangeColor;
+    //private Color inRangeColor;
 
     private bool isActivated = false;
 
     // pressure plate
-    private bool isPressurePlateActivated = false;
     private Transform plateButton = null;
     private Vector3 plateButtonOriPos;
     private Vector3 plateButtonActivatedPos;
     private Color plateButtonActivatedColor;
     public static event System.Action OnActivatePressurePlate;
 
-
     // temp
     private bool isButton;
-    private float cooldownTime = 1f;
+    private float cooldownTime = 25f;
     private float cooldownTimer = 0f;
+    public static event System.Action<ObjectController> OnPressButton;
+    public static event System.Action<ObjectController> OnButtonExpired;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,9 +87,9 @@ public class ObjectController : MonoBehaviour
         }
 
         oriColor = mr.material.color;
-        inRangeColor = new Color32(255, 133, 28, 255);
+        //inRangeColor = new Color32(255, 133, 28, 255);
 
-
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -79,8 +98,8 @@ public class ObjectController : MonoBehaviour
     {
         if(isInRange)
         {
-            if(!gameObject.CompareTag("PressurePlate"))
-                mr.material.color = inRangeColor;
+            //if(!gameObject.CompareTag("PressurePlate"))
+                //mr.material.color = inRangeColor;
         }
         else
         {
@@ -89,19 +108,19 @@ public class ObjectController : MonoBehaviour
         }
 
         // very temp logic
-        if (isButton)
+        if (isButton && isActivated)
         {
-            if(transform.position.y < .5f)
-            {
-                cooldownTimer -= Time.deltaTime;
+            cooldownTimer -= Time.deltaTime;
 
-                if(cooldownTimer < 0f)
-                {
-                    transform.position = new Vector3(transform.position.x, .5f, transform.position.z);
-                    cooldownTimer = cooldownTime;
-                }
+            if (cooldownTimer < 0f)
+            {
+                transform.position = new Vector3(transform.position.x, .5f,transform.position.z );
+
+                cooldownTimer = cooldownTime;
+                isActivated = false;
+
+                OnButtonExpired?.Invoke(this);
             }
-            
         }
     }
 
@@ -151,6 +170,8 @@ public class ObjectController : MonoBehaviour
         plateButton.localPosition = isActivated ? plateButtonActivatedPos : plateButtonOriPos;
         mr.material.color = isActivated ? plateButtonActivatedColor : oriColor;
 
+        PlaySFX(PlayerAction.PressurePlate);
+
         OnActivatePressurePlate?.Invoke();
     }
 
@@ -161,7 +182,55 @@ public class ObjectController : MonoBehaviour
         plateButton.localPosition = isActivated ? plateButtonActivatedPos : plateButtonOriPos;
         mr.material.color = isActivated ? plateButtonActivatedColor : oriColor;
 
+        PlaySFX(PlayerAction.PressurePlate);
+
         OnActivatePressurePlate?.Invoke();
+    }
+
+    public void PressButton()
+    {
+        if (isActivated)
+            return;
+
+        isActivated = true;
+
+        PlaySFX(PlayerAction.PressButton);
+
+        transform.localPosition = new Vector3(transform.localPosition.x, .3f, transform.localPosition.z);
+
+        OnPressButton?.Invoke(this);
+    }
+
+    public void ResetButton()
+    {
+        isActivated = false;
+        cooldownTimer = cooldownTime;
+        PlaySFX(PlayerAction.PressButton);
+
+        transform.localPosition = new Vector3(transform.localPosition.x, .5f,transform.localPosition.z);
+    }
+
+    public void PlaySFX(PlayerAction action)
+    {
+        switch (action)
+        {
+            case PlayerAction.Pickup:
+                audioSource.PlayOneShot(sfxPickup);
+                break;
+            case PlayerAction.Drop:
+                audioSource.PlayOneShot(sfxDrop);
+                break;
+            case PlayerAction.ToggleLever:
+                audioSource.PlayOneShot(sfxLever);
+                break;
+            case PlayerAction.PressurePlate:
+                audioSource.PlayOneShot(sfxPressurePlate);
+                break;
+            case PlayerAction.PressButton:
+                audioSource.PlayOneShot(sfxButton);
+                break;
+        }
+
     }
 
 }

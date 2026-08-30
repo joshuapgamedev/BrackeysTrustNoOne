@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4349e484843754d80e44abd04a44f7, type: 3}
+  m_Name: opening
+  m_EditorClassIdentifier: 
+  narratorID: opening
+  blocks:
+  - blockID: 1
+    runCondition: 0
+    dialogue:
+    - text: 'Hello! Welcome to the complete final revised build of the game. (version
+        1(15) delete this later)
+
+'
+      audio: {fileID: 0}
+      nextLineType: 2
+      delayAfter: 0
+      canBeInterrupted: 0
+    - text: 'How exciting.
+
+'
+      audio: {fileID: 0}
+      nextLineType: 2
+      delayAfter: 0
+      canBeInterrupted: 0
+    - text: 'Before you actually play the game you must complete the tutorial...
+        like every good game has
+
+'
+      audio: {fileID: 0}
+      nextLineType: 2
+      delayAfter: 0
+      canBeInterrupted: 0
+    - text: 'Are you ready?
+
+'
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 0.5
+      canBeInterrupted: 0
+    - text: 'Great!
+
+'
+      audio: {fileID: 0}
+      nextLineType: 2
+      delayAfter: 0
+      canBeInterrupted: 0
+    - text: 'Move on to the next room when you''re ready.
+
+'
+      audio: {fileID: 0}
+      nextLineType: 2
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 

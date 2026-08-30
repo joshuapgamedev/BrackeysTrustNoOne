@@ -1,0 +1,290 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4349e484843754d80e44abd04a44f7, type: 3}
+  m_Name: lever
+  m_EditorClassIdentifier: 
+  narratorID: Lever
+  blocks:
+  - blockID: 1
+    runCondition: 0
+    allowRandomSelection: 0
+    dialogue:
+    - text: 'Here is your first challenge.
+
+'
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: 'Very simple I assure you.
+
+'
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: "All you need to do it find ALL the levers \r\n"
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 1
+    - text: 'and <b>activate</b> them to proceed to the next puzzle room.
+
+'
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 1
+    - text: 'Go ahead and give it a try! '
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 1
+    waitType: 3
+    timeout: 10
+    responses:
+    - eventType: 2
+      dialogue:
+      - text: Come on... What took you so long?
+        audio: {fileID: 0}
+        nextLineType: 1
+        delayAfter: 1
+        canBeInterrupted: 0
+      nextBlockID: 4
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 0
+      dialogue:
+      - text: 
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 1
+      dialogue:
+      - text: Wow.. Someone is in a rush.
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    nextBlockID: 5
+    taskUpdate:
+      action: 1
+      taskID: leverPuzzle
+    randomResponse: 0
+  - blockID: 2
+    runCondition: 1
+    allowRandomSelection: 0
+    dialogue:
+    - text: "Hm.\r"
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: 'What''s wrong?
+
+'
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: 'It didn''t work?
+
+'
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Come on.. All you need to do is pull <b>ALL</b> the levers
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: "Maybe you should count the lever again, Player.\r"
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: 'Fine. I''ll help.
+
+'
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: One... Two... Three... Hmm..
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: 'I never said there were only three of them.
+
+'
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 10
+    responses:
+    - eventType: 2
+      dialogue:
+      - text: We have to continue eventually, you know.
+        audio: {fileID: 0}
+        nextLineType: 1
+        delayAfter: 1
+        canBeInterrupted: 0
+      nextBlockID: 5
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 0
+      dialogue: []
+      nextBlockID: 3
+      taskUpdate:
+        action: 2
+        taskID: leverPuzzle
+    - eventType: 1
+      dialogue: []
+      nextBlockID: 3
+      taskUpdate:
+        action: 2
+        taskID: leverPuzzle
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+    randomResponse: 0
+  - blockID: 3
+    runCondition: 3
+    allowRandomSelection: 0
+    dialogue:
+    - text: "Ah.\r"
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Finally.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: 'There we go. Wasn''t that fun, Player?
+
+'
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: 'Come on, let''s move to the next room.
+
+'
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: 'It will be fun.
+
+'
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+    nextBlockID: 
+    taskUpdate:
+      action: 4
+      taskID: leverPuzzle
+    randomResponse: 0
+  - blockID: 4
+    runCondition: 1
+    allowRandomSelection: 0
+    dialogue:
+    - text: "Chop chop, Player.\r"
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 3
+    timeout: 10
+    responses:
+    - eventType: 0
+      dialogue: []
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 2
+      dialogue: []
+      nextBlockID: 4
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 1
+      dialogue: []
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+    randomResponse: 0
+  - blockID: 5
+    runCondition: 1
+    allowRandomSelection: 0
+    dialogue:
+    - text: 'Come on.. Almost there.
+
+'
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 4
+    timeout: 10
+    responses:
+    - eventType: 0
+      dialogue: []
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 2
+      dialogue: []
+      nextBlockID: 5
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 1
+      dialogue: []
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+    randomResponse: 0

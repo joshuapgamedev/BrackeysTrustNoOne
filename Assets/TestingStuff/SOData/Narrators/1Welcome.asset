@@ -16,32 +16,42 @@ MonoBehaviour:
   sequences:
   - sequenceID: 1
     dialogue:
-    - text: Hello! Welcome to our <b>complete</b> little game! How exciting!
+    - text: Hello! Welcome to the <b>complete final revised build</b> of the game
+        (version 1(15) delete this later)
       audio: {fileID: 0}
       delayAfter: 0
       canBeInterrupted: 0
     waitType: 4
     timeout: 0
     responses: []
+    taskUpdate:
+      action: 0
+      taskID: 
   - sequenceID: 2
     dialogue:
-    - text: Before we get to the real thing, there are a couple of things you should
-        get familiar with first!
+    - text: How exciting!
       audio: {fileID: 0}
       delayAfter: 0
       canBeInterrupted: 0
     waitType: 4
     timeout: 0
     responses: []
+    taskUpdate:
+      action: 0
+      taskID: 
   - sequenceID: 3
     dialogue:
-    - text: But don't fret! I'm here to help!
+    - text: Before you actually play the game you must complete the tutorial... like
+        every good game has
       audio: {fileID: 0}
       delayAfter: 0
       canBeInterrupted: 0
     waitType: 4
     timeout: 0
     responses: []
+    taskUpdate:
+      action: 0
+      taskID: 
   - sequenceID: 4
     dialogue:
     - text: Are you ready?
@@ -49,15 +59,34 @@ MonoBehaviour:
       delayAfter: 0
       canBeInterrupted: 0
     waitType: 1
-    timeout: 1.5
+    timeout: 0.3
     responses: []
+    taskUpdate:
+      action: 0
+      taskID: 
   - sequenceID: 5
     dialogue:
-    - text: Great! Let's get started by moving onto the <b>green little platform</b>
-        (change this later) in front of you!
+    - text: 'Great!
+
+'
       audio: {fileID: 0}
       delayAfter: 0
       canBeInterrupted: 0
     waitType: 4
     timeout: 0
     responses: []
+    taskUpdate:
+      action: 0
+      taskID: 
+  - sequenceID: 6
+    dialogue:
+    - text: "Move on to the next room when you're ready.\r"
+      audio: {fileID: 0}
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 2
+    responses: []
+    taskUpdate:
+      action: 1
+      taskID: moveToLever

@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4349e484843754d80e44abd04a44f7, type: 3}
+  m_Name: square
+  m_EditorClassIdentifier: 
+  narratorID: SquareHole
+  blocks:
+  - blockID: 1
+    runCondition: 0
+    dialogue:
+    - text: Well. I have no intention to scared you.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: But this puzzle will totally be difficult for you
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: And I won't be giving you hint anymore.
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 7
+    timeout: 0
+    responses: []
+    nextBlockID: 2
+    taskUpdate:
+      action: 1
+      taskID: squareHole
+    randomResponse: 0
+  - blockID: 2
+    runCondition: 2
+    dialogue: []
+    waitType: 7
+    timeout: 0
+    responses:
+    - eventType: 0
+      dialogue:
+      - text: Player, that doesn't seem to fit.
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 0
+      dialogue:
+      - text: Player, this was designed for kids.
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 0
+      dialogue:
+      - text: Player, that shape doesn't look like that.
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 0
+      dialogue:
+      - text: Try again, Player. It'll totally work this time.
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 0
+      dialogue:
+      - text: Wait. I promise it works on my pc.
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    - eventType: 0
+      dialogue:
+      - text: Hm.. Maybe try turning it off and on again?
+        audio: {fileID: 0}
+        nextLineType: 0
+        delayAfter: 0
+        canBeInterrupted: 0
+      nextBlockID: 2
+      taskUpdate:
+        action: 0
+        taskID: 
+    nextBlockID: 
+    taskUpdate:
+      action: 1
+      taskID: squareHole
+    randomResponse: 1
+  - blockID: 3
+    runCondition: 3
+    dialogue:
+    - text: 'You finished the <b>totally</b> not broken puzzle room... '
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Congratulation.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: Now... Maybe we can take a break here.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: There's really no need to rush into the next room.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: In fact, you could stay here for a while.
+      audio: {fileID: 0}
+      nextLineType: 1
+      delayAfter: 1
+      canBeInterrupted: 0
+    - text: What do you think?
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+    nextBlockID: 
+    taskUpdate:
+      action: 4
+      taskID: squareHole
+    randomResponse: 0
+  - blockID: 4
+    runCondition: 1
+    dialogue:
+    - text: ...
+      audio: {fileID: 0}
+      nextLineType: 0
+      delayAfter: 0
+      canBeInterrupted: 0
+    waitType: 0
+    timeout: 0
+    responses: []
+    nextBlockID: 
+    taskUpdate:
+      action: 0
+      taskID: 
+    randomResponse: 0

@@ -23,9 +23,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform handPos;
     [SerializeField] private LayerMask groundLayer;
 
+    /*
     [Header("Health")]
     [SerializeField] private float maxHealth = 5f;
     [SerializeField] private TextMeshProUGUI healthText;
+    */
+
+    [Header("UI")]
+    [SerializeField] private GameObject crosshair;
+    [SerializeField] private GameObject grabCrosshair;
+
 
     private CharacterController characterController;
     private Vector3 velocity;
@@ -39,29 +46,31 @@ public class PlayerController : MonoBehaviour
 
     private bool isHoldingObject = false;
 
-    private float health;
+    //private float health;
     private bool damangeCooldown = false;
 
-    private float cooldownTime = 2f;
+   // private float cooldownTime = 2f;
     private float cooldownTimer = 0f;
 
-    private Coroutine regenRoutine = null;
+    //private Coroutine regenRoutine = null;
 
     public static bool CanMove { get; set; } = false;
 
     public static event System.Action OnPlayerJumped;
-    public static event System.Action OnPlayerInteracted;
     public static event System.Action OnPlayerToggleLever;
 
+    public static PlayerController Instance { get; private set; }
     void Start()
     {
+        Instance = this;
+
         characterController = GetComponent<CharacterController>();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
 
-        health = maxHealth;
-        UpdateHealthText();
+        //health = maxHealth;
+        //UpdateHealthText();
 
     }
 
@@ -77,9 +86,9 @@ public class PlayerController : MonoBehaviour
         {
             if (isHoldingObject && currentHolding != null)
             {
-                currentHolding.ObjectInRange(false);
-                currentHolding = null;
-                isHoldingObject = false;
+                ReleaseHeldObject();
+
+                return;
             }
 
             if (hasObjectInRange)
@@ -148,11 +157,15 @@ public class PlayerController : MonoBehaviour
             hasObjectInRange = true;
             currentFocus = other.GetComponent<ObjectController>();
             currentFocus.ObjectInRange(true);
+
+            ToggleCrosshair(true);
+
         }
         if (other.gameObject.CompareTag("PressurePlate"))
         {
             currentFocus = other.GetComponent<ObjectController>();
             currentFocus.TriggerPressurePlate();
+
         }
 
     }
@@ -168,15 +181,18 @@ public class PlayerController : MonoBehaviour
             if(currentFocus!= null)
                 currentFocus.ObjectInRange(false);
             currentFocus = null;
-            
+
+            ToggleCrosshair(false);
         }
         if (other.gameObject.CompareTag("PressurePlate"))
         {
             currentFocus.TriggerPressurePlate();
             currentFocus = null;
+
         }
     }
 
+    /*
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Danger"))
@@ -189,10 +205,12 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    */
 
 
     private void HoldingObject()
     {
+        ToggleCrosshair(true, true);
         Vector3 targetPos = handPos.position;
 
         /*
@@ -209,30 +227,101 @@ public class PlayerController : MonoBehaviour
             }
         }*/
 
-        Collider objectCollider = currentHolding.transform.GetChild(0).GetComponent<Collider>();
-       
-        Vector3 rayOrigin = targetPos + Vector3.up * 2f;
-
-        if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 5f, groundLayer, QueryTriggerInteraction.Ignore))
+        if(currentHolding.transform.childCount > 2)
         {
-            //Debug.Log($"Ray hit: {hit.collider.name}, Y: {hit.point.y}");
+            Collider[] colliders = currentHolding.GetComponentsInChildren<Collider>();
 
-            float objectHalfHeight = objectCollider.bounds.extents.y;
+            float lowestColliderY = float.MaxValue;
 
-            float minimumY = hit.point.y + objectHalfHeight;
+            foreach (Collider col in colliders)
+            {
+                // Ignore the giant interaction trigger
+                if (col.isTrigger)
+                    continue;
 
-            targetPos.y = Mathf.Max(targetPos.y, minimumY);
+                lowestColliderY = Mathf.Min(
+                    lowestColliderY,
+                    col.bounds.min.y
+                );
+            }
 
-            //Debug.Log($"TargetY: {targetPos.y}, " + $"ExtentsY: {objectCollider.bounds.extents.y}, " + $"MinY: {minimumY}");
+            Vector3 rayOrigin = targetPos + Vector3.up * 2f;
+
+            if (Physics.Raycast(
+                rayOrigin,
+                Vector3.down,
+                out RaycastHit hit,
+                5f,
+                groundLayer,
+                QueryTriggerInteraction.Ignore))
+            {
+                // Distance from object's ROOT/pivot
+                // to the lowest point of any collider
+                float pivotToBottom =
+                    currentHolding.transform.position.y
+                    - lowestColliderY;
+
+                float minimumRootY =
+                    hit.point.y + pivotToBottom;
+
+                targetPos.y = Mathf.Max(
+                    targetPos.y,
+                    minimumRootY
+                );
+            }
+
+            currentHolding.transform.position = targetPos;
+            currentHolding.ObjectInRange(true);
+        }
+        else
+        {
+            Collider objectCollider = currentHolding.transform.GetChild(0).GetComponent<Collider>();
+
+            Vector3 rayOrigin = targetPos + Vector3.up * 2f;
+
+            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 5f, groundLayer, QueryTriggerInteraction.Ignore))
+            {
+                //Debug.Log($"Ray hit: {hit.collider.name}, Y: {hit.point.y}");
+
+                float objectHalfHeight = objectCollider.bounds.extents.y;
+
+                float minimumY = hit.point.y + objectHalfHeight;
+
+                targetPos.y = Mathf.Max(targetPos.y, minimumY);
+
+                //Debug.Log($"TargetY: {targetPos.y}, " + $"ExtentsY: {objectCollider.bounds.extents.y}, " + $"MinY: {minimumY}");
+            }
+
+            //currentHolding.transform.position = targetPos;
+
+            Vector3 holdOffset = currentHolding.HoldPoint.position - currentHolding.transform.position;
+
+            currentHolding.transform.position = targetPos - holdOffset;
+
+            currentHolding.ObjectInRange(true);
         }
 
-        currentHolding.transform.position = targetPos;
+            
 
-        currentHolding.ObjectInRange(true);
-
-        OnPlayerInteracted?.Invoke();
     }
 
+    public void ReleaseHeldObject(bool playDropSFX = true)
+    {
+        StartCoroutine(ToggleCrosshairWhenReleased());
+
+        if (!isHoldingObject || currentHolding == null)
+            return;
+
+        if (playDropSFX)
+            currentHolding.PlaySFX(PlayerAction.Drop);
+
+        currentHolding.ObjectInRange(false);
+
+        currentHolding = null;
+        isHoldingObject = false;
+    }
+
+    /*
     private void TakeDamage(float amount)
     {
         health = Mathf.Clamp(health - amount, 0, maxHealth);
@@ -250,6 +339,7 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    
 
     private IEnumerator RegeneratingHealth()
     {
@@ -270,25 +360,22 @@ public class PlayerController : MonoBehaviour
     {
         healthText.text = health.ToString();
     }
-
-    private void InteractWithObject()
-    {
-        // very temp logic
-        if (currentFocus.transform.position.y > .4f)
-            currentFocus.transform.position = new Vector3(currentFocus.transform.position.x, .4f, currentFocus.transform.position.z);
-    }
-
+    */
     private void ToggleObject()
     {
+        StartCoroutine(ToggleCrosshairForSecond());
         // very temp logic
-        if(currentFocus.transform.localEulerAngles.z < 300 )
+        if (currentFocus.transform.localEulerAngles.z < 300 )
             currentFocus.transform.localEulerAngles = new Vector3(0f, 0f, -45f);
         else if (currentFocus.transform.localEulerAngles.z > 300)
             currentFocus.transform.localEulerAngles = new Vector3(0f, 0f, 45f);
 
         currentFocus.Activated();
         OnPlayerToggleLever?.Invoke();
+        currentFocus.PlaySFX(PlayerAction.ToggleLever);
     }
+
+    
 
     private void CheckObjectTag()
     {
@@ -296,6 +383,7 @@ public class PlayerController : MonoBehaviour
         {
             currentHolding = currentFocus;
             isHoldingObject = true;
+            currentHolding.PlaySFX(PlayerAction.Pickup);
         } 
         else if(currentFocus.CompareTag("Toggleable"))
         {
@@ -303,12 +391,43 @@ public class PlayerController : MonoBehaviour
         }
         else if (currentFocus.CompareTag("Interactable"))
         {
-            InteractWithObject();
-        }
-        else if(currentFocus.CompareTag("PressurePlate"))
-        {
-            currentFocus.TriggerPressurePlate();
+            StartCoroutine(ToggleCrosshairForSecond());
+            currentFocus.PressButton();
+            //InteractWithObject();
         }
     }
+
+    public bool IsHolding(ObjectController obj)
+    {
+        return isHoldingObject && currentHolding == obj;
+    }
+
+    private void ToggleCrosshair(bool on, bool isGrabbing = false)
+    {
+        if(!on)
+        {
+            crosshair.SetActive(false);
+            grabCrosshair.SetActive(false);
+            return;
+        }
+
+        crosshair.SetActive(isGrabbing?false:true);
+        grabCrosshair.SetActive(isGrabbing?true:false);
+    }
+
+    private IEnumerator ToggleCrosshairForSecond()
+    {
+        ToggleCrosshair(true, true);
+        yield return new WaitForSeconds(.5f);
+        ToggleCrosshair(true, false);
+    }
+
+    private IEnumerator ToggleCrosshairWhenReleased()
+    {
+        ToggleCrosshair(true, false);
+        yield return new WaitForSeconds(.2f);
+        ToggleCrosshair(false);
+    }
+
 }
 
