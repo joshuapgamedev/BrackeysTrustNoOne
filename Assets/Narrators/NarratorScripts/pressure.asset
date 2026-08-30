@@ -26,7 +26,7 @@ MonoBehaviour:
     - text: I mean this will REALY test your skills
       audio: {fileID: 8300000, guid: 7f0d2c5d0df66b740b64bcf810a1bfce, type: 3}
       nextLineType: 1
-      delayAfter: 1
+      delayAfter: 2
       canBeInterrupted: 0
     - text: You <b>won't</b> be able to leave this room until all plates are activated.
       audio: {fileID: 8300000, guid: af6182783c5c79e4ca132449aa85a272, type: 3}
