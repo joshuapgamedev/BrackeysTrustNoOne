@@ -1855,6 +1855,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 297826827}
     - target: {fileID: 2564305989716357032, guid: 7d4faeeea2aae2842a14ac3961a765c7, type: 3}
+      propertyPath: requiredShapes
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564305989716357032, guid: 7d4faeeea2aae2842a14ac3961a765c7, type: 3}
       propertyPath: squareHoleDoor
       value: 
       objectReference: {fileID: 297826824}
@@ -1862,6 +1866,10 @@ PrefabInstance:
       propertyPath: pressurePlateDoor
       value: 
       objectReference: {fileID: 297826825}
+    - target: {fileID: 2564305989716357032, guid: 7d4faeeea2aae2842a14ac3961a765c7, type: 3}
+      propertyPath: buttons.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2564305989716357032, guid: 7d4faeeea2aae2842a14ac3961a765c7, type: 3}
       propertyPath: levers.Array.data[0]
       value: 
