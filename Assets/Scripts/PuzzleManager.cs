@@ -8,7 +8,7 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private List<ObjectController> levers;
     [SerializeField] private List<ObjectController> pressurePlates;
     [SerializeField] private List<ObjectController> buttons;
-    [SerializeField] private int requiredShapes = 3;
+    [SerializeField] private int requiredShapes = 4;
     [SerializeField] private ObjectController greenButton;
 
     [Header("Doors")]
