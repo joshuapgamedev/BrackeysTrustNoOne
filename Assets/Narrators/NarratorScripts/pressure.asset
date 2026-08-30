@@ -16,25 +16,25 @@ MonoBehaviour:
   blocks:
   - blockID: 1
     runCondition: 0
+    allowRandomSelection: 0
     dialogue:
-    - text: Now that you've pulled those levers,
-      audio: {fileID: 0}
+    - text: Now that you've pulled those levers, this will test your skills.
+      audio: {fileID: 8300000, guid: 4e18d76957456a747a89511e92aad37f, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
-    - text: this will test your skills, Player.
-      audio: {fileID: 0}
+    - text: I mean this will REALY test your skills
+      audio: {fileID: 8300000, guid: 7f0d2c5d0df66b740b64bcf810a1bfce, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
-    - text: You <b>won't</b> be able to leave this room until all the red plates
-        are activated.
-      audio: {fileID: 0}
+    - text: You <b>won't</b> be able to leave this room until all plates are activated.
+      audio: {fileID: 8300000, guid: af6182783c5c79e4ca132449aa85a272, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: Go on. I'm watching.
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 28e165ba1bdbab9429cb92180c532f4a, type: 3}
       nextLineType: 0
       delayAfter: 0
       canBeInterrupted: 0
@@ -68,8 +68,10 @@ MonoBehaviour:
     taskUpdate:
       action: 1
       taskID: pressurePuzzle
+    randomResponse: 0
   - blockID: 2
     runCondition: 1
+    allowRandomSelection: 0
     dialogue:
     - text: There we go. You know how it works.
       audio: {fileID: 0}
@@ -116,8 +118,10 @@ MonoBehaviour:
     taskUpdate:
       action: 0
       taskID: 
+    randomResponse: 0
   - blockID: 3
     runCondition: 3
+    allowRandomSelection: 0
     dialogue:
     - text: You did it! The door should now be op-
       audio: {fileID: 0}
@@ -156,8 +160,10 @@ MonoBehaviour:
     taskUpdate:
       action: 4
       taskID: pressurePuzzle
+    randomResponse: 0
   - blockID: 4
     runCondition: 2
+    allowRandomSelection: 0
     dialogue:
     - text: What are you waiting for?
       audio: {fileID: 0}
@@ -209,8 +215,10 @@ MonoBehaviour:
     taskUpdate:
       action: 0
       taskID: 
+    randomResponse: 0
   - blockID: 5
     runCondition: 1
+    allowRandomSelection: 0
     dialogue:
     - text: '*Soothing music playing in the background*'
       audio: {fileID: 0}
@@ -242,3 +250,4 @@ MonoBehaviour:
     taskUpdate:
       action: 0
       taskID: 
+    randomResponse: 0

@@ -18,34 +18,34 @@ MonoBehaviour:
     runCondition: 0
     allowRandomSelection: 0
     dialogue:
-    - text: 'Here is your first challenge.
+    - text: 'Here is your first challenge to proceed to the next puzzle room.
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 450ac5f3c0ef99f489820693ac89c393, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: 'Very simple I assure you.
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 4ad53559598ee4b42b74d799bd709195, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
-    - text: "All you need to do it find ALL the levers \r\n"
-      audio: {fileID: 0}
+    - text: "Come on all you need to do it find <b>ALL</b> the levers \r\n"
+      audio: {fileID: 8300000, guid: 916fa1e3a37eb274c9af08db6194cd3f, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 1
     - text: 'and <b>activate</b> them to proceed to the next puzzle room.
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 0095fb1125efa6b4c8ae5f81de9f3e4c, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 1
     - text: 'Go ahead and give it a try! '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: b89b08dc41a908743a40b85d0d814a59, type: 3}
       nextLineType: 0
       delayAfter: 0
       canBeInterrupted: 1
@@ -54,8 +54,8 @@ MonoBehaviour:
     responses:
     - eventType: 2
       dialogue:
-      - text: Come on... What took you so long?
-        audio: {fileID: 0}
+      - text: Come on... almost there.
+        audio: {fileID: 8300000, guid: fe8fb326376beb94e8fd26cc1fae18e4, type: 3}
         nextLineType: 1
         delayAfter: 1
         canBeInterrupted: 0
@@ -94,51 +94,44 @@ MonoBehaviour:
     runCondition: 1
     allowRandomSelection: 0
     dialogue:
-    - text: "Hm.\r"
-      audio: {fileID: 0}
-      nextLineType: 1
-      delayAfter: 1
-      canBeInterrupted: 0
-    - text: 'What''s wrong?
-
-'
-      audio: {fileID: 0}
+    - text: "Hm. What's wrong?\r"
+      audio: {fileID: 8300000, guid: b8cd05f8fa24196468e7cf9c89564d3d, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: 'It didn''t work?
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 916c3b4a22d8607488d099d9bf7a3527, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: Come on.. All you need to do is pull <b>ALL</b> the levers
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 916fa1e3a37eb274c9af08db6194cd3f, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: "Maybe you should count the lever again, Player.\r"
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 0b9c95db54ee49f4c8ac7a34837bd73d, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: 'Fine. I''ll help.
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: d44f66fffd97b3c43b098c03c5fc2637, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: One... Two... Three... Hmm..
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: d49f7160310eea843802929af2b847bb, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: 'I never said there were only three of them.
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 424422c70620116439b5d00ed98ef120, type: 3}
       nextLineType: 0
       delayAfter: 0
       canBeInterrupted: 0
@@ -177,20 +170,15 @@ MonoBehaviour:
     runCondition: 3
     allowRandomSelection: 0
     dialogue:
-    - text: "Ah.\r"
-      audio: {fileID: 0}
-      nextLineType: 1
-      delayAfter: 1
-      canBeInterrupted: 0
-    - text: Finally.
-      audio: {fileID: 0}
+    - text: "Ah Finally.\r"
+      audio: {fileID: 8300000, guid: ec3987fcfcdf67143a3cbb173c631ca4, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
     - text: 'There we go. Wasn''t that fun, Player?
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 2cf1dc248162a824197b1817bd74970b, type: 3}
       nextLineType: 1
       delayAfter: 1
       canBeInterrupted: 0
@@ -221,7 +209,7 @@ MonoBehaviour:
     allowRandomSelection: 0
     dialogue:
     - text: "Chop chop, Player.\r"
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: 48f1154bc3f78574496ae2a1751d5542, type: 3}
       nextLineType: 0
       delayAfter: 0
       canBeInterrupted: 0
@@ -258,7 +246,7 @@ MonoBehaviour:
     - text: 'Come on.. Almost there.
 
 '
-      audio: {fileID: 0}
+      audio: {fileID: 8300000, guid: fe8fb326376beb94e8fd26cc1fae18e4, type: 3}
       nextLineType: 0
       delayAfter: 0
       canBeInterrupted: 0
