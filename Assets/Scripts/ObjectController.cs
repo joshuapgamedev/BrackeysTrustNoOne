@@ -45,6 +45,8 @@ public class ObjectController : MonoBehaviour
 
     private bool isActivated = false;
 
+    private Animator buttonAnimator;
+
     // pressure plate
     private Transform plateButton = null;
     private Vector3 plateButtonOriPos;
@@ -72,8 +74,8 @@ public class ObjectController : MonoBehaviour
         {
             isButton = true;
             cooldownTimer = cooldownTime;
+            buttonAnimator = transform.parent.GetComponent<Animator>();
         }
-
 
         
         if (gameObject.CompareTag("PressurePlate"))
@@ -196,7 +198,9 @@ public class ObjectController : MonoBehaviour
 
         PlaySFX(PlayerAction.PressButton);
 
-        transform.localPosition = new Vector3(transform.localPosition.x, .3f, transform.localPosition.z);
+        //transform.localPosition = new Vector3(transform.localPosition.x, .3f, transform.localPosition.z);
+
+        buttonAnimator.SetTrigger("Press");
 
         OnPressButton?.Invoke(this);
     }
@@ -207,7 +211,7 @@ public class ObjectController : MonoBehaviour
         cooldownTimer = cooldownTime;
         PlaySFX(PlayerAction.PressButton);
 
-        transform.localPosition = new Vector3(transform.localPosition.x, .5f,transform.localPosition.z);
+        //transform.localPosition = new Vector3(transform.localPosition.x, .5f,transform.localPosition.z);
     }
 
     public void PlaySFX(PlayerAction action)
