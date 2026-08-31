@@ -23,6 +23,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform handPos;
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] private float holdFollowSpeed = 12f;
+    [SerializeField] private float maxHoldSpeed = 8f;
+
+    private Rigidbody heldRb;
+    private bool heldOriginalUseGravity;
+
     /*
     [Header("Health")]
     [SerializeField] private float maxHealth = 5f;
@@ -99,10 +105,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        /*
         if (isHoldingObject && currentHolding != null)
         {
             HoldingObject();
         }
+        */
 
         if (damangeCooldown)
         {
@@ -111,6 +119,15 @@ public class PlayerController : MonoBehaviour
             {
                 damangeCooldown = false;
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (isHoldingObject && currentHolding != null && heldRb != null)
+        {
+            //HoldingObject();
+            HoldObject();
         }
     }
 
@@ -207,6 +224,23 @@ public class PlayerController : MonoBehaviour
     }
     */
 
+    private void HoldObject()
+    {
+        ToggleCrosshair(true, true);
+
+        Vector3 holdOffset = currentHolding.HoldPoint.position - currentHolding.transform.position;
+
+        Vector3 targetRootPosition = handPos.position - holdOffset;
+
+        Vector3 direction = targetRootPosition - heldRb.position;
+
+        Vector3 targetVelocity = direction * holdFollowSpeed;
+
+        // Prevent ridiculous physics launches
+        targetVelocity = Vector3.ClampMagnitude(targetVelocity, maxHoldSpeed);
+
+        heldRb.velocity = targetVelocity;
+    }
 
     private void HoldingObject()
     {
@@ -359,6 +393,18 @@ public class PlayerController : MonoBehaviour
 
         currentHolding.ObjectInRange(false);
 
+        // new
+        if (heldRb != null)
+        {
+            heldRb.useGravity = heldOriginalUseGravity;
+
+            heldRb.velocity = Vector3.zero;
+            heldRb.angularVelocity = Vector3.zero;
+        }
+
+        heldRb = null;
+        //
+
         currentHolding = null;
         isHoldingObject = false;
     }
@@ -429,6 +475,31 @@ public class PlayerController : MonoBehaviour
         {
             currentHolding = currentFocus;
             isHoldingObject = true;
+
+            // new
+
+            heldRb = currentHolding.GetComponent<Rigidbody>();
+            if (heldRb == null)
+            {
+                heldRb = currentHolding.GetComponentInChildren<Rigidbody>();
+            }
+            if (heldRb != null)
+            {
+                heldOriginalUseGravity = heldRb.useGravity;
+
+                // While we're actively pulling it toward the hand,
+                // gravity isn't particularly useful.
+                heldRb.useGravity = false;
+
+                heldRb.velocity = Vector3.zero;
+                heldRb.angularVelocity = Vector3.zero;
+            }
+            else
+            {
+                Debug.LogWarning( $"where is {currentHolding.name}'s rigibody?????" );
+            }
+            //
+
             currentHolding.PlaySFX(PlayerAction.Pickup);
         } 
         else if(currentFocus.CompareTag("Toggleable"))
