@@ -210,7 +210,7 @@ MonoBehaviour:
     runCondition: 1
     allowRandomSelection: 0
     dialogue:
-    - text: 
+    - text: '*Soothing music for the awkward silence.*'
       audio: {fileID: 0}
       nextLineType: 0
       delayAfter: 0

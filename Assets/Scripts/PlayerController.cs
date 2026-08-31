@@ -213,6 +213,8 @@ public class PlayerController : MonoBehaviour
         ToggleCrosshair(true, true);
         Vector3 targetPos = handPos.position;
 
+        bool touchingWall = false;
+
         /*
         Collider[] colliders = currentHolding.GetComponents<Collider>();
 
@@ -227,7 +229,7 @@ public class PlayerController : MonoBehaviour
             }
         }*/
 
-        if(currentHolding.transform.childCount > 2)
+        if (currentHolding.transform.childCount > 2)
         {
             Collider[] colliders = currentHolding.GetComponentsInChildren<Collider>();
 
@@ -235,7 +237,6 @@ public class PlayerController : MonoBehaviour
 
             foreach (Collider col in colliders)
             {
-                // Ignore the giant interaction trigger
                 if (col.isTrigger)
                     continue;
 
@@ -247,27 +248,40 @@ public class PlayerController : MonoBehaviour
 
             Vector3 rayOrigin = targetPos + Vector3.up * 2f;
 
-            if (Physics.Raycast(
-                rayOrigin,
-                Vector3.down,
-                out RaycastHit hit,
-                5f,
-                groundLayer,
-                QueryTriggerInteraction.Ignore))
+            /**
+            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 5f, groundLayer, QueryTriggerInteraction.Ignore))
             {
-                // Distance from object's ROOT/pivot
-                // to the lowest point of any collider
-                float pivotToBottom =
-                    currentHolding.transform.position.y
-                    - lowestColliderY;
+                float pivotToBottom = currentHolding.transform.position.y - lowestColliderY;
 
-                float minimumRootY =
-                    hit.point.y + pivotToBottom;
+                float minimumRootY = hit.point.y + pivotToBottom;
 
-                targetPos.y = Mathf.Max(
-                    targetPos.y,
-                    minimumRootY
-                );
+                targetPos.y = Mathf.Max(targetPos.y, minimumRootY);
+            }*/
+
+            RaycastHit wallHit;
+
+            if (Physics.Raycast(playerCamera.position, playerCamera.forward, out wallHit,  3f, groundLayer, QueryTriggerInteraction.Ignore))
+            {
+                if (Mathf.Abs(wallHit.normal.y) < 0.3f)
+                {
+                    touchingWall = true;
+
+                    Debug.Log($"Detected wall: {wallHit.collider.name}");
+                }
+            }
+
+            if (Mathf.Abs(wallHit.normal.y) < 0.3f)
+            {
+                Debug.Log($"Detected wall: {wallHit.collider.name}");
+            }
+            else
+            {
+                Debug.Log($"{wallHit.collider.name}");
+            }
+
+            if (touchingWall)
+            {
+                targetPos = wallHit.point + wallHit.normal * 0.3f;
             }
 
             currentHolding.transform.position = targetPos;
@@ -277,26 +291,54 @@ public class PlayerController : MonoBehaviour
         {
             Collider objectCollider = currentHolding.transform.GetChild(0).GetComponent<Collider>();
 
+            Vector3 holdOffset = currentHolding.HoldPoint.position - currentHolding.transform.position;
+
+            Vector3 rootPos = targetPos - holdOffset;
+
+            // floor
             Vector3 rayOrigin = targetPos + Vector3.up * 2f;
 
-            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 5f, groundLayer, QueryTriggerInteraction.Ignore))
+            
+            if (Physics.Raycast(rayOrigin,Vector3.down, out RaycastHit groundHit, 5f, groundLayer, QueryTriggerInteraction.Ignore))
             {
                 //Debug.Log($"Ray hit: {hit.collider.name}, Y: {hit.point.y}");
 
                 float objectHalfHeight = objectCollider.bounds.extents.y;
 
-                float minimumY = hit.point.y + objectHalfHeight;
+                float minimumY = groundHit.point.y + objectHalfHeight;
 
-                targetPos.y = Mathf.Max(targetPos.y, minimumY);
+                rootPos.y = Mathf.Max(rootPos.y, minimumY);
+                //targetPos.y = Mathf.Max(targetPos.y, minimumY);
 
                 //Debug.Log($"TargetY: {targetPos.y}, " + $"ExtentsY: {objectCollider.bounds.extents.y}, " + $"MinY: {minimumY}");
             }
 
+            // wall
+            if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit wallHit,  3f, groundLayer, QueryTriggerInteraction.Ignore))
+            {
+                if (Mathf.Abs(wallHit.normal.y) < 0.3f)
+                {
+                    Bounds bounds = objectCollider.bounds;
+
+                    float extentTowardWall = Mathf.Abs(wallHit.normal.x) * bounds.extents.x + Mathf.Abs(wallHit.normal.y) * bounds.extents.y + Mathf.Abs(wallHit.normal.z) * bounds.extents.z;
+
+                    float distanceFromWall = Vector3.Dot(rootPos - wallHit.point, wallHit.normal);
+
+                    float padding = 0.02f;
+                    float requiredDistance = extentTowardWall + padding;
+
+                    // push it if it gonna enter the wall
+                    if (distanceFromWall < requiredDistance - 0.02f)
+                    {
+                        rootPos += wallHit.normal * (requiredDistance - distanceFromWall);
+                    }
+                }
+            }
+
             //currentHolding.transform.position = targetPos;
 
-            Vector3 holdOffset = currentHolding.HoldPoint.position - currentHolding.transform.position;
-
-            currentHolding.transform.position = targetPos - holdOffset;
+            currentHolding.transform.position = rootPos;
+            //currentHolding.transform.position = targetPos - holdOffset;
 
             currentHolding.ObjectInRange(true);
         }
