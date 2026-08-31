@@ -48,13 +48,18 @@ public class GameManager : MonoBehaviour
             Cursor.visible = true;
 
             PlayerController.CanMove = false;
+
+            ScriptController.Instance?.PauseNarratorAudio();
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            PlayerController.CanMove = true;
+            if (ScriptController.Instance.gameStart)
+                PlayerController.CanMove = true;
+            
+            ScriptController.Instance?.ResumeNarratorAudio();
         }
     }
 

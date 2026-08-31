@@ -33,7 +33,7 @@ public class ScriptController : MonoBehaviour
 
     private ButtonPressResult? currentButtonResult = null;
 
-    private bool gameStart = false;
+    public bool gameStart = false;
 
     private void Awake()
     {
@@ -624,6 +624,22 @@ public class ScriptController : MonoBehaviour
         if (narratorAudioSource.isPlaying)
         {
             narratorAudioSource.Stop();
+        }
+    }
+
+    public void PauseNarratorAudio()
+    {
+        if (narratorAudioSource != null && narratorAudioSource.isPlaying)
+        {
+            narratorAudioSource.Pause();
+        }
+    }
+
+    public void ResumeNarratorAudio()
+    {
+        if (narratorAudioSource != null)
+        {
+            narratorAudioSource.UnPause();
         }
     }
 }
