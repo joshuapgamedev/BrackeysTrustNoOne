@@ -23,7 +23,7 @@ MonoBehaviour:
 '
       audio: {fileID: 8300000, guid: 450ac5f3c0ef99f489820693ac89c393, type: 3}
       nextLineType: 1
-      delayAfter: 1
+      delayAfter: 1.5
       canBeInterrupted: 0
     - text: 'Very simple I assure you.
 
@@ -35,14 +35,14 @@ MonoBehaviour:
     - text: "Come on all you need to do it find <b>ALL</b> the levers \r\n"
       audio: {fileID: 8300000, guid: 916fa1e3a37eb274c9af08db6194cd3f, type: 3}
       nextLineType: 1
-      delayAfter: 1
+      delayAfter: 1.5
       canBeInterrupted: 1
     - text: 'and <b>activate</b> them to proceed to the next puzzle room.
 
 '
       audio: {fileID: 8300000, guid: 0095fb1125efa6b4c8ae5f81de9f3e4c, type: 3}
       nextLineType: 1
-      delayAfter: 1
+      delayAfter: 1.5
       canBeInterrupted: 1
     - text: 'Go ahead and give it a try! '
       audio: {fileID: 8300000, guid: b89b08dc41a908743a40b85d0d814a59, type: 3}

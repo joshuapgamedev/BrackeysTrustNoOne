@@ -189,7 +189,8 @@ public class ScriptController : MonoBehaviour
                 if (interruptDialogue)
                     break;
 
-                yield return StartCoroutine(PlayLine(line));
+                yield return PlayLine(line);
+                //yield return StartCoroutine(PlayLine(line));
 
                 if (interruptDialogue)
                     break;
@@ -198,7 +199,8 @@ public class ScriptController : MonoBehaviour
             isPlayingBlockDialogue = false;
 
             // wait for action event
-            yield return StartCoroutine(WaitForBlockEvent(current));
+            //yield return StartCoroutine(WaitForBlockEvent(current));
+            yield return WaitForBlockEvent(current);
 
             currentWaitType = ScriptWaitType.None;
 
@@ -215,7 +217,8 @@ public class ScriptController : MonoBehaviour
 
                 foreach (ScriptLine line in response.dialogue)
                 {
-                    yield return StartCoroutine(PlayLine(line));
+                    //yield return StartCoroutine(PlayLine(line));
+                    yield return PlayLine(line);
                 }
 
                 if (!string.IsNullOrEmpty(response.nextBlockID))
@@ -238,6 +241,12 @@ public class ScriptController : MonoBehaviour
                     Debug.LogWarning( $"Cannot find ScriptBlock: {nextBlockID}");
                 }
             }
+        }
+
+        
+        if (narratorAudioSource.isPlaying)
+        {
+            narratorAudioSource.Stop();
         }
 
         narratorBox.SetActive(false);
