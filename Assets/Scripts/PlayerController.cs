@@ -126,6 +126,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isHoldingObject && currentHolding != null && heldRb != null)
         {
+            if(IsStandingOnHoldableObject())
+            {
+                ReleaseHeldObject();
+                return;
+            }
             //HoldingObject();
             HoldObject();
         }
@@ -544,6 +549,20 @@ public class PlayerController : MonoBehaviour
         ToggleCrosshair(true, false);
         yield return new WaitForSeconds(.2f);
         ToggleCrosshair(false);
+    }
+
+    private bool IsStandingOnHoldableObject()
+    {
+        Vector3 origin = transform.position + Vector3.up * 0.1f;
+
+        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit,  1.2f,  ~0, QueryTriggerInteraction.Ignore))
+        {
+            ObjectController obj = hit.collider.GetComponentInParent<ObjectController>();
+
+            return obj == currentHolding;
+        }
+
+        return false;
     }
 
 }
